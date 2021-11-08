@@ -1,27 +1,7 @@
 "use strict";
 
-// Object.defineProperty(exports, "__esModule", {
-//   value: true
-// });
-// exports.default = void 0;
-
-// var _gifsicle = _interopRequireDefault(require("./gifsicle"));
 import _gifsicle from './gifsicle.js'
-// import _types from './types.js'
-import _options from './options.js'
 import _io from './io.js'
-
-// var _types = require("./types");
-
-// var _options = require("./options");
-
-// var _io = require("./io");
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : {
-		default: obj
-	};
-}
 
 const queue = [];
 /**
@@ -41,13 +21,10 @@ const initModule = () => {
 /**
  * Reset the gifsicle module
  */
-
-
 const resetModule = () => {
 	if (queue.length > 0) {
 		// remove finished job
 		queue.shift(); // trigger next job
-
 		if (queue.length > 0) {
 			queue[0]();
 		}
@@ -57,45 +34,37 @@ const resetModule = () => {
  * Encode an input image using Gifsicle
  *
  * @async
- * @param {Buffer} image Image input buffer
- * @param {EncodeOptions} encodeOptions Encoding options passed to Gifsicle
+ * @param {Buffer} data Image input buffer
+ * @param {EncodeOptions} command 
  * @returns {Buffer} Processed image buffer
  */
-
-
-const encode = async (image, encodeOptions = {}) => {
+const encode = async (obj={}) => {
+	let {
+		data=null,
+		command=[]
+	} = obj
 	await initModule();
 	return new Promise((resolve, reject) => {
-		// merge default options
-		const filledEncodeOptions = {
-			..._options.defaultEncodeOptions,
-			...encodeOptions
-		}; // build arguments
 
-		const gifsicleArguments = [ // ignore gifsicle warnings
-			// remove application extensions from the input image
+		const gifsicleArguments = [ 
+			// ignore gifsicle warnings
 			'--no-warnings',
-			// set optimization level
+			// remove application extensions from the input image
 			'--no-app-extensions',
-			// turn on interlacing
-			`--optimize=${filledEncodeOptions.optimizationLevel}`,
-			// set number of colors
-			filledEncodeOptions.interlaced === true ? '--interlace' : false,
-			typeof filledEncodeOptions.colors === 'number' ? `--colors=${filledEncodeOptions.colors}` : false,
-			// resize image
-			...(filledEncodeOptions.width || filledEncodeOptions.height ? ['--resize', `${filledEncodeOptions.width || '_'}x${filledEncodeOptions.height || '_'}`] : []),
+			...command,
+			// `--lossy=${filledEncodeOptions.lossy}`,
 			// set input & output file names
-			`--lossy=${filledEncodeOptions.lossy}`,
 			'-i', '/input.gif', '-o', '/output.gif'
-		].filter(Boolean);
+		]
+
 		let resolved = false;
 		(0, _gifsicle)({
 			stdout: _io.stdout,
 			stderr: _io.stderr,
 			arguments: gifsicleArguments,
-			input: new Uint8Array(image.buffer),
+			// input: new Uint8Array(image.buffer),
+			input: data,
 			output: res => {
-				// resolve(Buffer.from(res));
 				resolve(res);
 				resolved = true;
 			}
@@ -111,7 +80,3 @@ const encode = async (image, encodeOptions = {}) => {
 	});
 };
 export default encode
-
-// var _default = encode;
-// exports.default = _default;
-// module.exports = encode;
