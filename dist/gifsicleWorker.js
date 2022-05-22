@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    importScripts('./gifsicle-wasm-browser.js');
+    importScripts('./gifsicle.js');
 
 
     onmessage = function (e) {

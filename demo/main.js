@@ -30,7 +30,7 @@ async function start(url, command) {
             }
         })
         ////////////////////// worker
-        let gifsicleWorker = new Worker('../dist/worker.js');
+        let gifsicleWorker = new Worker('../dist/gifsicleWorker.js');
         // let gifsicleWorker = new Worker('../dist/gifsicleWorkerAllInPack.js');
         // 开始转换
         gifsicleWorker.postMessage({
