@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./demo/favicon.svg" width="50">
+    <img src="./demo/favicon.svg" width="70">
 </p>
 <p align="center">
     En
