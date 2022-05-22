@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+:root {
+    --color1: #6a85b6;
+    --color0: #2a426e;
+    --color2: #f1eb22;
+    --color3: #b6b127;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    padding: 30px 62px 50px 62px;
+    background-image: linear-gradient(to top, var(--color1) 0%, #bac8e0 100%);
+    /* background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%); */
+    min-height: 100vh;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #2a4370;
+}
+body {
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    border: 13px dashed transparent;
+    background-color: white;
+    /* max-width: 100px; */
+    margin: 0 auto;
+    box-shadow: 20px 5px 40px rgba(30, 48, 82, 0.377);
+}
+h1{
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 900;
+    font-family: 'Abril Fatface';
+    text-transform:capitalize;
+}
+.red {
+    color: red;
+    font-size: 62px;
+}
+
+.green {
+    color: #14ac35;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex > div p {
+    font-size: 22px;
+    text-align: center;
+}
+.f_s_12 {
+    font-size: 12px;
+}
+a {
+    color: blue;
+}
+
+.command {
+    width: 100%;
+    border: 3px solid var(--color1);
+    background-color: var(--color0);
+    border-radius: 4px;
+    height: 50px;
+    font-size: 22px;
+    text-indent: 20px;
+    color: var(--color2);
+    /* border: none; */
+    /* box-shadow: inset 4px 2px 20px #1e3052a9; */
+}
+
+.imgBox {
+    display: flex;
+    align-items: center;
+}
+
+.imgBox img {
+    width: auto;
+    max-width: calc((100vw - 600px) / 2);
+    padding: 10px;
+}
+
+button {
+    flex-shrink: 0;
+    height: 50px;
+    width: 30%;
+    border-radius: 6px;
+    max-width: 200px;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 20px;
+    background-color: var(--color2);
+    border: none;
+    border-bottom: 5px solid var(--color3);
+}
+
+code {
+    font-size: 14px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+p.m_t_10 {
+    margin-top: 6px;
+}
+
+.minButton {
+    width: 50px;
+    height: 24px;
+    font-size: 14px;
+    margin-left: 0;
+    border-bottom: 3px solid var(--color3);
+}
+.minButton.blue {
+    border-bottom: 3px solid var(--color0);
+    background-color: var(--color1);
+    color: white;
+}
+
+svg {
+    display: none;
+}
+.history span {
+    opacity: 0.5;
+}
+#file {
+    border: var(--color1) dashed 3px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+}

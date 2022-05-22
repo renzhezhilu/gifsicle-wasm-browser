@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifsicle in browser (wasm)</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="icon" href="favicon.svg" />
+</head>
+
+<body class="">
+    <div class="" style="display:flex;">
+        <div style="width:100%; ">
+            <h1>gifsicle wasm browser
+                <a target="_blank" href="https://github.com/renzhezhilu/webp2jpg-online/stargazers"><img
+                        alt="GitHub stars"
+                        src="https://img.shields.io/github/stars/renzhezhilu/webp2jpg-online?style=social"></a>
+            </h1>
+            <br>
+            <div>
+                Dorp gif here or test ->
+                <Button class="minButton blue textGif">1.gif</Button>
+                <Button class="minButton blue textGif">2.gif</Button>
+                <Button class="minButton blue textGif">3.gif</Button>
+                <Button class="minButton blue textGif">4.gif</Button>
+                <Button class="minButton blue textGif">5.gif</Button>
+                <Button class="minButton blue textGif">6.gif</Button>
+            </div>
+            <br>
+            <input id="file" type="file" accept=".gif">
+
+            <br>
+            <br>
+
+            <h3>Input command:</h3>
+            <div class="flex">
+                <input class="command" name="" type="text" value="-O2 --lossy=30"></input>
+
+                <button class="button mainRun">Run</button>
+            </div>
+
+            <br>
+            <br>
+            <div class="printConsole">
+
+            </div>
+            <br>
+            <div class="history">
+                <h3>History</h3>
+
+            </div>
+        </div>
+        <!--  -->
+        <div style="width:480px; padding-left:80px;flex-shrink: 0;">
+            <h3>How do?</h3>
+            <p>
+                01. drop an gif file <br> 02. change command <br> 03. click run
+            </p>
+            <br>
+            <h3>Try these
+                <a href="https://www.lcdf.org/gifsicle/man.html" target="_blank">command</a>
+            </h3>
+            <br>
+            <p>
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    -O1 --lossy=60
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    -O3 --lossy=200
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    -O2 --colors 32
+                </code-o>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    -O3 --resize _x100
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+            --resize-touch 80x200
+                </code>
+            </p>
+
+
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --scale 0.5
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --crop 0,0+100x100
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --rotate-90
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --no-loopcount
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --loopcount=forever
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --delay=2
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --flip-horizontal
+                </code>
+            </p>
+            <p class="m_t_10">
+                <button class="minButton minButtonRun">Run</button>
+                <code>
+                    --flip-vertical
+                </code>
+            </p>
+
+        </div>
+    </div>
+
+
+
+</body>
+<script src="./main.js"></script>
+
+</html>

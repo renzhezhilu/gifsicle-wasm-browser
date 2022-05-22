@@ -1,27 +1,19 @@
 "use strict";
 
-// Object.defineProperty(exports, "__esModule", {
-//   value: true
-// });
-// exports.default = void 0;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-// var _gifsicle = _interopRequireDefault(require("./gifsicle"));
-import _gifsicle from './gifsicle.js'
-// import _types from './types.js'
-import _options from './options.js'
-import _io from './io.js'
+var _gifsicle = _interopRequireDefault(require("./gifsicle"));
 
-// var _types = require("./types");
+var _types = require("./types");
 
-// var _options = require("./options");
+var _options = require("./options");
 
-// var _io = require("./io");
+var _io = require("./io");
 
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : {
-		default: obj
-	};
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const queue = [];
 /**
@@ -29,14 +21,14 @@ const queue = [];
  */
 
 const initModule = () => {
-	return new Promise(resolve => {
-		// add a new job to the queue
-		queue.push(resolve); // start it if there is no queue
+  return new Promise(resolve => {
+    // add a new job to the queue
+    queue.push(resolve); // start it if there is no queue
 
-		if (queue.length === 1) {
-			queue[0]();
-		}
-	});
+    if (queue.length === 1) {
+      queue[0]();
+    }
+  });
 };
 /**
  * Reset the gifsicle module
@@ -44,14 +36,14 @@ const initModule = () => {
 
 
 const resetModule = () => {
-	if (queue.length > 0) {
-		// remove finished job
-		queue.shift(); // trigger next job
+  if (queue.length > 0) {
+    // remove finished job
+    queue.shift(); // trigger next job
 
-		if (queue.length > 0) {
-			queue[0]();
-		}
-	}
+    if (queue.length > 0) {
+      queue[0]();
+    }
+  }
 };
 /**
  * Encode an input image using Gifsicle
@@ -64,54 +56,43 @@ const resetModule = () => {
 
 
 const encode = async (image, encodeOptions = {}) => {
-	await initModule();
-	return new Promise((resolve, reject) => {
-		// merge default options
-		const filledEncodeOptions = {
-			..._options.defaultEncodeOptions,
-			...encodeOptions
-		}; // build arguments
+  await initModule();
+  return new Promise((resolve, reject) => {
+    // merge default options
+    const filledEncodeOptions = { ..._options.defaultEncodeOptions,
+      ...encodeOptions
+    }; // build arguments
 
-		const gifsicleArguments = [ // ignore gifsicle warnings
-			// remove application extensions from the input image
-			'--no-warnings',
-			// set optimization level
-			'--no-app-extensions',
-			// turn on interlacing
-			`--optimize=${filledEncodeOptions.optimizationLevel}`,
-			// set number of colors
-			filledEncodeOptions.interlaced === true ? '--interlace' : false,
-			typeof filledEncodeOptions.colors === 'number' ? `--colors=${filledEncodeOptions.colors}` : false,
-			// resize image
-			...(filledEncodeOptions.width || filledEncodeOptions.height ? ['--resize', `${filledEncodeOptions.width || '_'}x${filledEncodeOptions.height || '_'}`] : []),
-			// set input & output file names
-			`--lossy=${filledEncodeOptions.lossy}`,
-			'-i', '/input.gif', '-o', '/output.gif'
-		].filter(Boolean);
-		let resolved = false;
-		(0, _gifsicle)({
-			stdout: _io.stdout,
-			stderr: _io.stderr,
-			arguments: gifsicleArguments,
-			input: new Uint8Array(image.buffer),
-			output: res => {
-				// resolve(Buffer.from(res));
-				resolve(res);
-				resolved = true;
-			}
-		}).then(() => {
-			(0, _io.flush)();
+    const gifsicleArguments = [// ignore gifsicle warnings
+    '--no-warnings', // remove application extensions from the input image
+    '--no-app-extensions', // set optimization level
+    `--optimize=${filledEncodeOptions.optimizationLevel}`, // turn on interlacing
+    filledEncodeOptions.interlaced === true ? '--interlace' : false, // set number of colors
+    typeof filledEncodeOptions.colors === 'number' ? `--colors=${filledEncodeOptions.colors}` : false, // resize image
+    ...(filledEncodeOptions.width || filledEncodeOptions.height ? ['--resize', `${filledEncodeOptions.width || '_'}x${filledEncodeOptions.height || '_'}`] : []), // set input & output file names
+    '-i', '/input.gif', '-o', '/output.gif'].filter(Boolean);
+    let resolved = false;
+    (0, _gifsicle.default)({
+      stdout: _io.stdout,
+      stderr: _io.stderr,
+      arguments: gifsicleArguments,
+      input: new Uint8Array(image.buffer),
+      output: res => {
+        resolve(Buffer.from(res));
+        resolved = true;
+      }
+    }).then(() => {
+      (0, _io.flush)();
 
-			if (!resolved) {
-				reject();
-			}
+      if (!resolved) {
+        reject();
+      }
 
-			resetModule();
-		});
-	});
+      resetModule();
+    });
+  });
 };
-export default encode
 
-// var _default = encode;
-// exports.default = _default;
-// module.exports = encode;
+var _default = encode;
+exports.default = _default;
+module.exports = encode;

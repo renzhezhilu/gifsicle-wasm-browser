@@ -1,9 +1,9 @@
 "use strict";
 
-// Object.defineProperty(exports, "__esModule", {
-//   value: true
-// });
-// // exports.flush = exports.stderr = exports.stdout = void 0;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.flush = exports.stderr = exports.stdout = void 0;
 
 /* eslint-disable no-console */
 let out = '';
@@ -22,7 +22,7 @@ const stdout = char => {
   }
 };
 
-// exports.stdout = stdout;
+exports.stdout = stdout;
 let err = '';
 /**
  * Process stderr stream
@@ -43,7 +43,7 @@ const stderr = char => {
  */
 
 
-// exports.stderr = stderr;
+exports.stderr = stderr;
 
 const flush = () => {
   if (out.length > 0) {
@@ -57,4 +57,4 @@ const flush = () => {
   }
 };
 
-export default {flush,stderr,stdout}
+exports.flush = flush;
