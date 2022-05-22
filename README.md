@@ -6,7 +6,7 @@
     <a href="#">中文</a>
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1> 
-<img src="./demo/ui.jpg" >
+<img src="./demo/ui.png" >
 
 
 
