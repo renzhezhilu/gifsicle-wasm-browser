@@ -3,7 +3,7 @@
     <a href="./README_CN.md">中文</a>
 </p>
 <p align="center">
-    <img src="./demo/favicon.svg" width="70">
+    <img src="./demo/favicon.svg" width="100">
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1> 
 
