@@ -11,13 +11,16 @@
 在浏览器中使用worker和WebAssembly运行Gifsicle，
 通过Gifsicle的node.js版本[wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle)修改而来。
 
+Run Gifsicle with worker and WebAssembly in browser,
+Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle).
+
 <img src="./demo/ui.jpg" >
 
 
 # Demo
-[Complete demo]() ⬇️ [Download]()
+[Complete demo]() 
 
-[Simple demo]() ⬇️ [Download]()
+[Simple demo]()
 
 [Gif compression](https://imagestool.com/gif-compress)
 
@@ -100,9 +103,6 @@ or
     )
 ...
 ```
-# Download
-[gifsicle-wasm-browser.zip]()
-
 # Docs
 [Gifsicle manual](https://www.lcdf.org/gifsicle/man.html)
 
