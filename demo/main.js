@@ -14,7 +14,7 @@ let throttle = {
 
 pageEvent()
 start(gifUrl, getCommand())
-
+let time
 async function start(url, command) {
     document.querySelector('.printConsole').innerHTML = `<h2 class="red" >🔥 Running...</h2>`
     document.querySelector('body').classList.add('working')
@@ -28,7 +28,6 @@ async function start(url, command) {
                 buf: buf
             }
         })
-        let time = new Date()
         gifsicleWorker({
             buffer: file.buf,
             command: command
@@ -58,6 +57,7 @@ async function start(url, command) {
 function gifsicleWorker(post = {}, workerUrl = '') {
     return new Promise((res, rej) => {
         let worker = new Worker(workerUrl);
+        time = new Date()
         worker.postMessage(post);
         worker.onmessage = function (e) {
             if (!e.data) {
