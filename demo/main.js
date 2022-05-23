@@ -33,8 +33,8 @@ async function start(url, command) {
             command: command
         },
             // or 
-            // '../dist/gifsicleWorkerAllInPack.min.js'
-            '../dist/gifsicleWorker.min.js'
+            '../dist/gifsicleWorkerAllInPack.min.js'
+            // '../dist/gifsicleWorker.min.js'
         ).then(gif => {
             printConsole({
                 file,
