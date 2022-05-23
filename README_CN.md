@@ -17,6 +17,8 @@
 
 [简单demo](https://renzhezhilu.github.io/gifsicle-wasm-browser/demo/simple.html)
 
+[使用cdn的简单demo(codepen)](https://codepen.io/random233/pen/xxYLeJd)
+
 [Gif压缩](https://imagestool.com/gif-compress)
 
 [Gif裁剪](https://imagestool.com/gif-crop)
@@ -83,21 +85,8 @@ gifsicle.min.js、gifsicle.wasm 和 gifsicleWorker.min.js 必须放在同一目�
 ...
 ```
 ## cdn
-```javascript
-...
-    gifsicleWorker({buffer,command},
-        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorker.min.js'
-    )
-...
-```
-or
-```javascript
-...
-    gifsicleWorker({buffer,command},
-        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorkerAllInPack.min.js'
-    )
-...
-```
+[jsdelivr](https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/)
+
 # 文档
 [Gifsicle 手册](https://www.lcdf.org/gifsicle/man.html)
 

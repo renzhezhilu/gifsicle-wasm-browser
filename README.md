@@ -18,6 +18,8 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
 
 [Simple demo](https://renzhezhilu.github.io/gifsicle-wasm-browser/demo/simple.html)
 
+[Simple demo use cdn(codepen)](https://codepen.io/random233/pen/xxYLeJd)
+
 [Gif compression](https://imagestool.com/gif-compress)
 
 [Gif crop](https://imagestool.com/gif-crop)
@@ -84,21 +86,8 @@ All files are packed in gifsicleWorkerAllInPack.min.js
 ...
 ```
 ## cdn
-```javascript
-...
-    gifsicleWorker({buffer,command},
-        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorker.min.js'
-    )
-...
-```
-or
-```javascript
-...
-    gifsicleWorker({buffer,command},
-        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorkerAllInPack.min.js'
-    )
-...
-```
+[jsdelivr](https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/)
+
 # Docs
 [Gifsicle manual](https://www.lcdf.org/gifsicle/man.html)
 
