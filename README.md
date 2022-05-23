@@ -7,10 +7,6 @@
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1> 
 
-
-在浏览器中使用worker和WebAssembly运行Gifsicle，
-通过Gifsicle的node.js版本[wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle)修改而来。
-
 Run Gifsicle with worker and WebAssembly in browser,
 Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle).
 
@@ -18,9 +14,9 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
 
 
 # Demo
-[Complete demo]() 
+[Complete demo](https://renzhezhilu.github.io/gifsicle-wasm-browser/demo/) 
 
-[Simple demo]()
+[Simple demo](https://renzhezhilu.github.io/gifsicle-wasm-browser/demo/simple.html)
 
 [Gif compression](https://imagestool.com/gif-compress)
 
@@ -91,7 +87,7 @@ All files are packed in gifsicleWorkerAllInPack.min.js
 ```javascript
 ...
     gifsicleWorker({buffer,command},
-        '../dist/gifsicleWorkerAllInPack.min.js'
+        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorker.min.js'
     )
 ...
 ```
@@ -99,7 +95,7 @@ or
 ```javascript
 ...
     gifsicleWorker({buffer,command},
-        '../dist/gifsicleWorkerAllInPack.min.js'
+        'https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/dist/gifsicleWorkerAllInPack.min.js'
     )
 ...
 ```
@@ -111,9 +107,6 @@ gifsicle-wasm-browser is developed by [@renzhezhilu](https://github.com/renzhezh
 
 
 # To do
-- [x] 单个Gif输入和输出
-- [ ] 多个Gif输入输出(完整版)
-
 - [x] Single Gif input and output
 - [ ] Multiple Gif input and output (full version)
 

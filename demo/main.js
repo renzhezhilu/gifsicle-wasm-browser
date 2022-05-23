@@ -19,7 +19,6 @@ async function start(url, command) {
     document.querySelector('.printConsole').innerHTML = `<h2 class="red" >🔥 Running...</h2>`
     document.querySelector('body').classList.add('working')
     throttle.run(async () => {
-        let time = new Date()
         save.url = url
         /////////////////////////
         console.log(url);
@@ -29,6 +28,7 @@ async function start(url, command) {
                 buf: buf
             }
         })
+        let time = new Date()
         gifsicleWorker({
             buffer: file.buf,
             command: command
