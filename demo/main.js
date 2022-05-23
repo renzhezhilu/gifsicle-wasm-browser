@@ -1,3 +1,5 @@
+
+//   
 let gifUrl = './1.gif'
 let save = {
     url: null,
@@ -32,8 +34,8 @@ async function start(url, command) {
             buffer: file.buf,
             command: command
         },
-            // or 
             '../dist/gifsicleWorkerAllInPack.min.js'
+            // or 
             // '../dist/gifsicleWorker.min.js'
         ).then(gif => {
             printConsole({
