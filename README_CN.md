@@ -19,11 +19,8 @@
 
 [使用cdn的简单demo(codepen)](https://codepen.io/random233/pen/xxYLeJd)
 
-[Gif压缩](https://imagestool.com/gif-compress)
-
 [Gif裁剪](https://imagestool.com/gif-crop)
 
-[Gif倒放](https://imagestool.com/gif-reverse)
 
 
 # 快速开始

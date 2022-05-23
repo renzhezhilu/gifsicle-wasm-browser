@@ -20,11 +20,8 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
 
 [Simple demo use cdn(codepen)](https://codepen.io/random233/pen/xxYLeJd)
 
-[Gif compression](https://imagestool.com/gif-compress)
-
 [Gif crop](https://imagestool.com/gif-crop)
 
-[Gif upside down](https://imagestool.com/gif-reverse)
 
 
 # Quick setup
