@@ -13,38 +13,6 @@
 
 <img src="./demo/ui.jpg" >
 
-# Quick setup
-
-```javascript
-let command = ['-O2','--lossy=30']
-let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
-/*
-    gifsicle.js、gifsicle.wasm and gifsicleWorker.js in the same directory
-*/ 
-let gifsicleWorker = new Worker('../dist/gifsicleWorker.js');
-/*
-    All files are packed in gifsicleWorkerAllInPack.js
-    let gifsicleWorker = new Worker('../dist/gifsicleWorkerAllInPack.js');
-*/ 
-gifsicleWorker.postMessage({
-    buffer: buffer,
-    command: command
-});
-gifsicleWorker.onmessage = function (e) {
-    //  error
-    if (!e.data) {
-        return
-    }
-    // success
-    console.log(e.data)
-    // e.data return -> Blob size: 736843 type: "image/gif"
-};
-//  error
-gifsicleWorker.onerror = function (e) {
-    console.error(e);
-    gifsicleWorker.terminate();
-};
-```
 
 # Demo
 [完整示例]()
@@ -55,8 +23,53 @@ gifsicleWorker.onerror = function (e) {
 
 [Gif裁剪]()
 
+
+# Quick setup
+
+```javascript
+let command = ['-O2','--lossy=30']
+let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
+function gifsicleWorker(post = {}, workerUrl = '') {
+    return new Promise((res, rej) => {
+        let worker = new Worker(workerUrl);
+        worker.postMessage(post);
+        worker.onmessage = function (e) {
+            if (!e.data) {
+                worker.terminate();
+                rej(e)
+                return
+            }
+            worker.terminate();
+            res(e.data)
+        };
+        worker.onerror = function (e) {
+            worker.terminate();
+            rej(e)
+        };
+    })
+}
+gifsicleWorker({buffer,command},
+    //  All files are packed in gifsicleWorkerAllInPack.min.js
+    // '../dist/gifsicleWorkerAllInPack.min.js'
+    // or 
+    // gifsicle.min.js、gifsicle.wasm and gifsicleWorker.min.js must be in the same directory
+    '../dist/gifsicleWorker.min.js'
+).then(blob => {
+    // success
+    console.log(blob)
+    // blob return -> Blob size: 736843 type: "image/gif"
+}).catch(e => {
+    //  error
+    console.error(e);
+})
+
+
+```
+
+
 # To do
-[ ] 多文件输入输出
+- [x] 单个Gif输入和输出
+- [ ] 多个Gif输入输出(完整版)
 
 
 

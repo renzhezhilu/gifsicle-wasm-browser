@@ -1,3 +1,5 @@
+/*! gifsicle wasm browser v0.1 | https://github.com/renzhezhilu/gifsicle-wasm-browser */
+
 (function () {
     'use strict';
 

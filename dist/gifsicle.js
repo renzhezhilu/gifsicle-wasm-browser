@@ -1,3 +1,4 @@
+/*! gifsicle wasm browser v0.1 | https://github.com/renzhezhilu/gifsicle-wasm-browser */
 var gifsicle = (function () {
   'use strict';
 
@@ -150,7 +151,7 @@ var gifsicle = (function () {
               };
             }
           }
-        } else ;
+        } else;
         var out = Module["print"] || console.log.bind(console);
         var err = Module["printErr"] || console.warn.bind(console);
         for (key in moduleOverrides) {
@@ -738,8 +739,8 @@ var gifsicle = (function () {
         };
         var TTY = {
           ttys: [],
-          init: function () {},
-          shutdown: function () {},
+          init: function () { },
+          shutdown: function () { },
           register: function (dev, ops) {
             TTY.ttys[dev] = {
               input: [],
@@ -1048,7 +1049,7 @@ var gifsicle = (function () {
                 var new_node;
                 try {
                   new_node = FS.lookupNode(new_dir, new_name);
-                } catch (e) {}
+                } catch (e) { }
                 if (new_node) {
                   for (var i in new_node.contents) {
                     throw new FS.ErrnoError(55)
@@ -1419,7 +1420,7 @@ var gifsicle = (function () {
             try {
               var node = FS.lookupNode(dir, name);
               return 20
-            } catch (e) {}
+            } catch (e) { }
             return FS.nodePermissions(dir, "wx")
           },
           mayDelete: function (dir, name, isdir) {
@@ -1476,7 +1477,7 @@ var gifsicle = (function () {
           },
           createStream: function (stream, fd_start, fd_end) {
             if (!FS.FSStream) {
-              FS.FSStream = function () {};
+              FS.FSStream = function () { };
               FS.FSStream.prototype = {
                 object: {
                   get: function () {
@@ -1762,7 +1763,7 @@ var gifsicle = (function () {
             var new_node;
             try {
               new_node = FS.lookupNode(new_dir, new_name);
-            } catch (e) {}
+            } catch (e) { }
             if (old_node === new_node) {
               return
             }
@@ -1788,7 +1789,7 @@ var gifsicle = (function () {
               }
             }
             try {
-              if (FS.trackingDelegate["willMovePath"]) ;
+              if (FS.trackingDelegate["willMovePath"]);
             } catch (e) {
               err("FS.trackingDelegate['willMovePath']('" + old_path + "', '" + new_path + "') threw an exception: " + e.message);
             }
@@ -1801,7 +1802,7 @@ var gifsicle = (function () {
               FS.hashAddNode(old_node);
             }
             try {
-              if (FS.trackingDelegate["onMovePath"]) ;
+              if (FS.trackingDelegate["onMovePath"]);
             } catch (e) {
               err("FS.trackingDelegate['onMovePath']('" + old_path + "', '" + new_path + "') threw an exception: " + e.message);
             }
@@ -1824,14 +1825,14 @@ var gifsicle = (function () {
               throw new FS.ErrnoError(10)
             }
             try {
-              if (FS.trackingDelegate["willDeletePath"]) ;
+              if (FS.trackingDelegate["willDeletePath"]);
             } catch (e) {
               err("FS.trackingDelegate['willDeletePath']('" + path + "') threw an exception: " + e.message);
             }
             parent.node_ops.rmdir(parent, name);
             FS.destroyNode(node);
             try {
-              if (FS.trackingDelegate["onDeletePath"]) ;
+              if (FS.trackingDelegate["onDeletePath"]);
             } catch (e) {
               err("FS.trackingDelegate['onDeletePath']('" + path + "') threw an exception: " + e.message);
             }
@@ -1864,14 +1865,14 @@ var gifsicle = (function () {
               throw new FS.ErrnoError(10)
             }
             try {
-              if (FS.trackingDelegate["willDeletePath"]) ;
+              if (FS.trackingDelegate["willDeletePath"]);
             } catch (e) {
               err("FS.trackingDelegate['willDeletePath']('" + path + "') threw an exception: " + e.message);
             }
             parent.node_ops.unlink(parent, name);
             FS.destroyNode(node);
             try {
-              if (FS.trackingDelegate["onDeletePath"]) ;
+              if (FS.trackingDelegate["onDeletePath"]);
             } catch (e) {
               err("FS.trackingDelegate['onDeletePath']('" + path + "') threw an exception: " + e.message);
             }
@@ -2029,7 +2030,7 @@ var gifsicle = (function () {
                   follow: !(flags & 131072)
                 });
                 node = lookup.node;
-              } catch (e) {}
+              } catch (e) { }
             }
             var created = false;
             if (flags & 64) {
@@ -2082,7 +2083,7 @@ var gifsicle = (function () {
               }
             }
             try {
-              var trackingFlags; if (FS.trackingDelegate["onOpenFile"]) ;
+              var trackingFlags; if (FS.trackingDelegate["onOpenFile"]);
             } catch (e) {
               err("FS.trackingDelegate['onOpenFile']('" + path + "', flags) threw an exception: " + e.message);
             }
@@ -2314,8 +2315,8 @@ var gifsicle = (function () {
                 random_device = function () {
                   return crypto_module["randomBytes"](1)[0]
                 };
-              } catch (e) {}
-            } else ;
+              } catch (e) { }
+            } else;
             if (!random_device) {
               random_device = function () {
                 abort("random_device");
@@ -2457,7 +2458,7 @@ var gifsicle = (function () {
                 follow: !dontResolveLastLink
               });
               path = lookup.path;
-            } catch (e) {}
+            } catch (e) { }
             var ret = {
               isRoot: false,
               exists: false,
@@ -2504,7 +2505,7 @@ var gifsicle = (function () {
               var current = PATH.join2(parent, part);
               try {
                 FS.mkdir(current);
-              } catch (e) {}
+              } catch (e) { }
               parent = current;
             }
             return current
@@ -2792,8 +2793,8 @@ var gifsicle = (function () {
           DB_VERSION: 20,
           DB_STORE_NAME: "FILE_DATA",
           saveFilesToDB: function (paths, onload, onerror) {
-            onload = onload || function () {};
-            onerror = onerror || function () {};
+            onload = onload || function () { };
+            onerror = onerror || function () { };
             var indexedDB = FS.indexedDB();
             try {
               var openRequest = indexedDB.open(FS.DB_NAME(), FS.DB_VERSION);
@@ -2833,8 +2834,8 @@ var gifsicle = (function () {
             openRequest.onerror = onerror;
           },
           loadFilesFromDB: function (paths, onload, onerror) {
-            onload = onload || function () {};
-            onerror = onerror || function () {};
+            onload = onload || function () { };
+            onerror = onerror || function () { };
             var indexedDB = FS.indexedDB();
             try {
               var openRequest = indexedDB.open(FS.DB_NAME(), FS.DB_VERSION);
@@ -3196,7 +3197,7 @@ var gifsicle = (function () {
             wasmMemory.grow(size - buffer.byteLength + 65535 >>> 16);
             updateGlobalBufferAndViews(wasmMemory.buffer);
             return 1
-          } catch (e) {}
+          } catch (e) { }
         }
 
         function _emscripten_resize_heap(requestedSize) {
@@ -3349,7 +3350,7 @@ var gifsicle = (function () {
           return 6
         }
 
-        function _pthread_join() {}
+        function _pthread_join() { }
         var FSNode = function (parent, name, mode, rdev) {
           if (!parent) {
             parent = this;
@@ -3530,7 +3531,7 @@ var gifsicle = (function () {
           if (implicit && noExitRuntime && status === 0) {
             return
           }
-          if (noExitRuntime) ; else {
+          if (noExitRuntime); else {
             ABORT = true;
             if (Module["onExit"]) Module["onExit"](status);
           }
@@ -3621,7 +3622,7 @@ var gifsicle = (function () {
     }
   };
 
-  var _io = {flush,stderr,stdout};
+  var _io = { flush, stderr, stdout };
 
   const queue = [];
   /**
@@ -3629,26 +3630,26 @@ var gifsicle = (function () {
    */
 
   const initModule = () => {
-  	return new Promise(resolve => {
-  		// add a new job to the queue
-  		queue.push(resolve); // start it if there is no queue
+    return new Promise(resolve => {
+      // add a new job to the queue
+      queue.push(resolve); // start it if there is no queue
 
-  		if (queue.length === 1) {
-  			queue[0]();
-  		}
-  	});
+      if (queue.length === 1) {
+        queue[0]();
+      }
+    });
   };
   /**
    * Reset the gifsicle module
    */
   const resetModule = () => {
-  	if (queue.length > 0) {
-  		// remove finished job
-  		queue.shift(); // trigger next job
-  		if (queue.length > 0) {
-  			queue[0]();
-  		}
-  	}
+    if (queue.length > 0) {
+      // remove finished job
+      queue.shift(); // trigger next job
+      if (queue.length > 0) {
+        queue[0]();
+      }
+    }
   };
   /**
    * Encode an input image using Gifsicle
@@ -3658,46 +3659,46 @@ var gifsicle = (function () {
    * @param {EncodeOptions} command 
    * @returns {Buffer} Processed image buffer
    */
-  const encode = async (obj={}) => {
-  	let {
-  		data=null,
-  		command=[]
-  	} = obj;
-  	await initModule();
-  	return new Promise((resolve, reject) => {
+  const encode = async (obj = {}) => {
+    let {
+      data = null,
+      command = []
+    } = obj;
+    await initModule();
+    return new Promise((resolve, reject) => {
 
-  		const gifsicleArguments = [ 
-  			// ignore gifsicle warnings
-  			'--no-warnings',
-  			// remove application extensions from the input image
-  			'--no-app-extensions',
-  			...command,
-  			// `--lossy=${filledEncodeOptions.lossy}`,
-  			// set input & output file names
-  			'-i', '/input.gif', '-o', '/output.gif'
-  		];
+      const gifsicleArguments = [
+        // ignore gifsicle warnings
+        '--no-warnings',
+        // remove application extensions from the input image
+        '--no-app-extensions',
+        ...command,
+        // `--lossy=${filledEncodeOptions.lossy}`,
+        // set input & output file names
+        '-i', '/input.gif', '-o', '/output.gif'
+      ];
 
-  		let resolved = false;
-  		(gifsicle)({
-  			stdout: _io.stdout,
-  			stderr: _io.stderr,
-  			arguments: gifsicleArguments,
-  			// input: new Uint8Array(image.buffer),
-  			input: data,
-  			output: res => {
-  				resolve(res);
-  				resolved = true;
-  			}
-  		}).then(() => {
-  			(0, _io.flush)();
+      let resolved = false;
+      (gifsicle)({
+        stdout: _io.stdout,
+        stderr: _io.stderr,
+        arguments: gifsicleArguments,
+        // input: new Uint8Array(image.buffer),
+        input: data,
+        output: res => {
+          resolve(res);
+          resolved = true;
+        }
+      }).then(() => {
+        (0, _io.flush)();
 
-  			if (!resolved) {
-  				reject();
-  			}
+        if (!resolved) {
+          reject();
+        }
 
-  			resetModule();
-  		});
-  	});
+        resetModule();
+      });
+    });
   };
 
   return encode;

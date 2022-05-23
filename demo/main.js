@@ -29,23 +29,14 @@ async function start(url, command) {
                 buf: buf
             }
         })
-        ////////////////////// worker
-        let gifsicleWorker = new Worker('../dist/gifsicleWorker.js');
-        // let gifsicleWorker = new Worker('../dist/gifsicleWorkerAllInPack.js');
-        // 开始转换
-        gifsicleWorker.postMessage({
+        gifsicleWorker({
             buffer: file.buf,
             command: command
-        });
-        // 量化转换
-        gifsicleWorker.onmessage = function (e) {
-            if (!e.data) {
-                document.querySelector('.printConsole').innerHTML = `<h2 class="red">Error!</h2>`
-                document.querySelector('body').classList.remove('working')
-                return
-            }
-            console.log(e.data);
-            let gif = e.data
+        },
+            // or 
+            '../dist/gifsicleWorkerAllInPack.min.js'
+            // '../dist/gifsicleWorker.min.js'
+        ).then(gif => {
             printConsole({
                 file,
                 gif,
@@ -54,21 +45,36 @@ async function start(url, command) {
                 afterUrl: URL.createObjectURL(gif),
                 time: ((new Date() - time) / 1000).toFixed(1),
             })
-        };
-        // 转换错误
-        gifsicleWorker.onerror = function (e) {
-            console.error(e);
-            // res(null);
-            gifsicleWorker.terminate();
-        };
-        ////////////////////// no worker
-
+        }).catch(e => {
+            document.querySelector('.printConsole').innerHTML = `<h2 class="red">Error!</h2>`
+            document.querySelector('body').classList.remove('working')
+        })
         /////////////////////////
 
     }, 300);
 
 }
 
+function gifsicleWorker(post = {}, workerUrl = '') {
+    return new Promise((res, rej) => {
+        let worker = new Worker(workerUrl);
+        worker.postMessage(post);
+        worker.onmessage = function (e) {
+            if (!e.data) {
+                worker.terminate();
+                rej(e)
+                return
+            }
+            console.log(e.data);
+            worker.terminate();
+            res(e.data)
+        };
+        worker.onerror = function (e) {
+            worker.terminate();
+            rej(e)
+        };
+    })
+}
 
 function history(text) {
     document.querySelector('.history').innerHTML += text
@@ -104,8 +110,8 @@ function pageEvent() {
             start(e.innerText, getCommand())
         });
     })
-     ////////////////////////
-     document.querySelectorAll('.minButtonRun').forEach(e => {
+    ////////////////////////
+    document.querySelectorAll('.minButtonRun').forEach(e => {
         e.addEventListener("click", _ => {
             let c = e.nextSibling.nextSibling.innerText
             c = c.split(' ').filter(f => Boolean(f))

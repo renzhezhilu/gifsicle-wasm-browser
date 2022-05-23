@@ -8,7 +8,7 @@ export default [{
         // umd – 通用模块定义，以amd，cjs 和 iife 为一体
         // system - SystemJS 加载器格式
         output: {
-            file: './dist/gifsicle-wasm-browser.js',
+            file: './dist/gifsicle.js',
             format: 'iife',
             name: 'gifsicle'
         }
@@ -22,7 +22,7 @@ export default [{
         // umd – 通用模块定义，以amd，cjs 和 iife 为一体
         // system - SystemJS 加载器格式
         output: {
-            file: './dist/worker.js',
+            file: './dist/gifsicleWorker.js',
             format: 'iife',
             name: 'gifsicleWorker'
         }
