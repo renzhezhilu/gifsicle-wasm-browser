@@ -24,10 +24,23 @@
 
 
 # 快速开始
+[下载代码](https://github.com/renzhezhilu/gifsicle-wasm-browser/archive/refs/heads/main.zip)
 
 ```javascript
 (async function(){
-  
+    let command = ['-O2', '--lossy=30','--rotate-90']
+    let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
+    gifsicleWorker({buffer,command},
+        '../dist/gifsicleWorker.min.js'
+    ).then(blob => {
+        // 成功
+        console.log(blob)
+        // blob 返回 -> Blob size: 736843 type: "image/gif"
+    }).catch(e => {
+        // 失败
+        console.error(e);
+    })
+
     function gifsicleWorker(post = {}, workerUrl = '') {
         return new Promise((res, rej) => {
             let worker = new Worker(workerUrl);
@@ -48,18 +61,6 @@
         })
     }
 
-    let command = ['-O2', '--lossy=30','--rotate-90']
-    let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
-    gifsicleWorker({buffer,command},
-        '../dist/gifsicleWorker.min.js'
-    ).then(blob => {
-        // 成功
-        console.log(blob)
-        // blob 返回 -> Blob size: 736843 type: "image/gif"
-    }).catch(e => {
-        // 失败
-        console.error(e);
-    })
 })()
 ```
 ## 普通调用
@@ -82,7 +83,7 @@ gifsicle.min.js、gifsicle.wasm 和 gifsicleWorker.min.js 必须放在同一目�
 ...
 ```
 ## cdn
-[jsdelivr](https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/)
+[jsdelivr](https://www.jsdelivr.com/package/gh/renzhezhilu/gifsicle-wasm-browser?path=dist)
 
 # 文档
 [Gifsicle 手册](https://www.lcdf.org/gifsicle/man.html)

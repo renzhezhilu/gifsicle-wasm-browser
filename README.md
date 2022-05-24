@@ -25,10 +25,24 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
 
 
 # Quick setup
+[Download code](https://github.com/renzhezhilu/gifsicle-wasm-browser/archive/refs/heads/main.zip)
 
 ```javascript
 (async function(){
-  
+
+    let command = ['-O2', '--lossy=30','--rotate-90']
+    let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
+    gifsicleWorker({buffer,command},
+        '../dist/gifsicleWorker.min.js'
+    ).then(blob => {
+        // success
+        console.log(blob)
+        // blob return -> Blob size: 736843 type: "image/gif"
+    }).catch(e => {
+        // error
+        console.error(e);
+    })
+
     function gifsicleWorker(post = {}, workerUrl = '') {
         return new Promise((res, rej) => {
             let worker = new Worker(workerUrl);
@@ -49,18 +63,6 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
         })
     }
 
-    let command = ['-O2', '--lossy=30','--rotate-90']
-    let buffer = await fetch('./1.gif').then(file => file.arrayBuffer())
-    gifsicleWorker({buffer,command},
-        '../dist/gifsicleWorker.min.js'
-    ).then(blob => {
-        // success
-        console.log(blob)
-        // blob return -> Blob size: 736843 type: "image/gif"
-    }).catch(e => {
-        // error
-        console.error(e);
-    })
 })()
 ```
 ## normal call
@@ -83,7 +85,7 @@ All files are packed in gifsicleWorkerAllInPack.min.js
 ...
 ```
 ## cdn
-[jsdelivr](https://cdn.jsdelivr.net/gh/renzhezhilu/gifsicle-wasm-browser@master/)
+[jsdelivr](https://www.jsdelivr.com/package/gh/renzhezhilu/gifsicle-wasm-browser?path=dist)
 
 # Docs
 [Gifsicle manual](https://www.lcdf.org/gifsicle/man.html)
