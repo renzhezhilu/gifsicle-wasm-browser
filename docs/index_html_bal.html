@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  -->
+    <link rel="shortcut icon" href=favicon.png>
+    <link rel="stylesheet/less" type="text/css" href="./css/index.less" />
+    <script src="./js/less.js"></script>
+
+
+    <!--  -->
+</head>
+
+<body class="">
+    <div id="app">
+        <header>
+            <nav>
+                <!-- <a target="_blank" href="https://github.com/renzhezhilu/gifsicle-wasm-browser/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/renzhezhilu/gifsicle-wasm-browser"></a> -->
+                {{message}}
+                <span>|</span>
+                <a href="" target="_blank">Github</a>
+                <span>|</span>
+                <a href="" target="_blank">Npm</a>
+                <span>|</span>
+                <a href="" target="_blank">More</a>
+            </nav>
+            <h1>Gifsicle Wasm Broswer</h1>
+            <p>Compress, rotate, crop and other operations on Gif images</p>
+        </header>
+        <main>
+            <div class="shareBox">
+                <div class="icon flex_center2">
+                    <i class="i ri:code-s-slash-fill"></i>
+                </div>
+                <p>Creat <br> Demo Url</p>
+            </div>
+            <div class="block step">
+                <div class="title">
+                    <p>01</p>
+                    <h2>Input gif files</h2>
+                </div>
+                <div class="con">
+                    <div class="flex_center wrap fs12">
+                        <div class="mr10">
+                            Drop Gif here or
+
+                            <button class="button color size1 op5 ">
+                                <small>Random</small>
+                            </button>
+                            Gif or
+                        </div>
+                        <div class="inputUrl fs0">
+                            <input placeholder="Input Gif Url" class="" type="text">
+                            <button class="button color size1 op5 ">
+                                <small>Get</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="inputBox">
+
+                        <div class="gifBox">
+                            <button class="del button size1">
+                                <i class="i ri:close-line"></i>
+
+                            </button>
+                            <div class="img">
+                                <img src="./1.gif" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="name">1.gif</div>
+                                <p>200x300</p>
+                                <p>123P</p>
+                                <p>12.2Mb</p>
+                                <p>1.2s</p>
+                            </div>
+                        </div>
+                        <div class="gifBoxInputBut button "><span class="iconText">+</span></div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="block step">
+                <div class="title">
+                    <p>02</p>
+                    <h2>Input commands</h2>
+                </div>
+                <div class="con">
+                    <div class="commandsBox">
+                        <textarea name="" id="" cols="10" rows="2">-O2 --lossy=30 1.gif 2.gif -o /out/out.gif</textarea>
+                    </div>
+                    <br>
+                    <button class="button color size2 mr10">
+                        Run
+                    </button>
+                    <button class="button sub size2 ">
+                        <span class="iconText">+</span>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <div class="block step">
+                <div class="title">
+                    <p>03</p>
+                    <h2>Output</h2>
+
+
+                </div>
+                <div class="con">
+                    <div class="green">
+                        <h2 class="op8 flex_center ">
+                            <i class="i ri:check-line mr5"></i>
+                            Done! <span>12</span> Gifs take <span>0.7s</span>
+                        </h2>
+                    </div>
+                    <div class="red ">
+                        <h2 class="op8 flex_center">
+                            <i class="i ri:error-warning-line mr5"></i>
+                            Error！
+                        </h2>
+                    </div>
+                    <div class="outputBox">
+                        <div class="gifBox">
+                            <div>
+                                <p>
+                                    <b>out.gif</b>
+
+                                </p>
+                                <p>
+                                    <span>1.23MB</span>
+                                    <span>200x300 </span>
+                                    <span>123p</span>
+                                    <span>2.3s</span>
+                                </p>
+                                <img src="./1.gif" alt="">
+                            </div>
+                            <div>
+                                <p>
+                                    <b>out.gif</b>
+
+                                </p>
+                                <p>
+                                    <span>1.23MB</span>
+                                    <span>200x300 </span>
+                                    <span>123p</span>
+                                    <span>2.3s</span>
+                                </p>
+                                <img src="./1.gif" alt="">
+                            </div>
+                            <div>
+                                <p>
+                                    <b>out.gif</b>
+
+                                </p>
+                                <p>
+                                    <span>1.23MB</span>
+                                    <span>200x300 </span>
+                                    <span>123p</span>
+                                    <span>2.3s</span>
+                                </p>
+                                <img src="./1.gif" alt="">
+                            </div>
+                            <div>
+                                <p>
+                                    <b>out.gif</b>
+
+                                </p>
+                                <p>
+                                    <span>1.23MB</span>
+                                    <span>200x300 </span>
+                                    <span>123p</span>
+                                    <span>2.3s</span>
+                                </p>
+                                <img src="./1.gif" alt="">
+                            </div>
+                            <div>
+                                <p>
+                                    <b>out.gif</b>
+
+                                </p>
+                                <p>
+                                    <span>1.23MB</span>
+                                    <span>200x300 </span>
+                                    <span>123p</span>
+                                    <span>2.3s</span>
+                                </p>
+                                <img src="./1.gif" alt="">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+</body>
+<script src="./js/pxmu.min.js"></script>
+<script src="./js/vue2.6.js"></script>
+<script src="./js/index.js"></script>
+
+
+</html>

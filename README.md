@@ -7,7 +7,9 @@
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1> 
 
-Run Gifsicle with worker and WebAssembly in browser,
+
+Run Gifsicle with worker and WebAssembly in browser,Compress, rotate, crop and other operations on Gif images.
+
 Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle).
 
 <img src="./demo/ui.jpg" >
@@ -65,7 +67,7 @@ Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/c
 
 })()
 ```
-## normal call
+## Normal call
 gifsicle.min.js、gifsicle.wasm and gifsicleWorker.min.js must be in the same directory
 ```javascript
 ...
@@ -75,7 +77,7 @@ gifsicle.min.js、gifsicle.wasm and gifsicleWorker.min.js must be in the same di
 ...
 ```
 
-## single file call
+## Single file call
 All files are packed in gifsicleWorkerAllInPack.min.js
 ```javascript
 ...
@@ -84,7 +86,7 @@ All files are packed in gifsicleWorkerAllInPack.min.js
     )
 ...
 ```
-## cdn
+## Cdn
 [jsdelivr](https://www.jsdelivr.com/package/gh/renzhezhilu/gifsicle-wasm-browser?path=dist)
 
 # Docs
@@ -96,7 +98,9 @@ gifsicle-wasm-browser is developed by [@renzhezhilu](https://github.com/renzhezh
 
 # To do
 - [x] Single Gif input and output
-- [ ] Multiple Gif input and output (full version)
+- [x] Multiple Gif input and output (full version)
+- [x] Npm
+- [ ] Multi-core processing
 
 
 

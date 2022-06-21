@@ -1,0 +1,401 @@
+//////////////////////////////////////////////////////
+
+header {
+  text-align: center;
+  padding: 0 30px 40px 30px;
+  nav {
+    margin-bottom: 60px;
+    span {
+      opacity: 0.5;
+      padding: 0 6px;
+    }
+  }
+  h1 {
+    font-size: 46px;
+    font-weight: 900;
+    padding-bottom: 10px;
+    text-shadow: 0.313px 1.975px 0px rgba(255, 255, 255, 0.13);
+  }
+  p {
+    font-size: 22px;
+    opacity: 0.5;
+    font-weight: 900;
+    text-shadow: 0.313px 1.975px 0px rgba(255, 255, 255, 0.13);
+  }
+}
+main {
+  width: 85%;
+  max-width: 1600px;
+  margin: 0 auto;
+  color: var(--text_white);
+  padding: 40px 40px;
+  background-color: var(--text_op);
+  border-radius: 12px;
+  box-shadow: -68.81px 46.413px 109px 0px rgba(34, 34, 34, 0.53);
+  position: relative;
+  .shareBox {
+    overflow: hidden;
+    position: fixed;
+    z-index: 100;
+    bottom: -10px;
+    margin-bottom: -6%;
+    opacity: 0.2;
+    left: 3%;
+    padding-bottom: 30px;
+    width: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-height: 130px;
+    height: 130px;
+    border-radius: 16px;
+    background-color: var(--text_white);
+    backdrop-filter: blur(10px);
+    box-shadow: 30px 22px 55px 0px rgba(34, 34, 34, 0.53);
+    color: var(--text);
+    font-weight: 900;
+    font-size: 16px;
+    transition: 0.3s;
+    &>div{
+    padding:5px 12px;
+    &.w100{
+      padding: 12px;
+    }
+
+    }
+    &.show {
+      opacity: 1;
+      margin-bottom: 0%;
+      
+    }
+    &.copy {
+      width: 300px;
+      height: 300px;
+      max-height: 300px;
+      padding: 30px;
+      left: 50%;
+      top: 50%;
+      margin: -150px 0 0 -150px;
+      .icon {
+        background-color: var(--text);
+        color: var(--text_white);
+      }
+    }
+   
+    a {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      word-break: break-all;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+    .icon {
+      margin-bottom: 5px;
+      width: 50px;
+      height: 50px;
+      background-color: cadetblue;
+      border-radius: 50%;
+      flex-shrink: 0;
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .block {
+    padding-bottom: 40px;
+    &.step {
+      display: flex;
+      justify-content: space-between;
+      .title {
+        width: 100%;
+        max-width: 200px;
+        min-width: 120px;
+        flex-shrink: 0;
+        text-align: right;
+        padding: 0 50px 0 0;
+        // outline: red 1px solid;
+        p {
+          font-size: 42px;
+          z-index: 1;
+          opacity: 0.2;
+          font-weight: 900;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          background-image: linear-gradient(
+            to top,
+            transparent,
+            transparent,
+            var(--text_white),
+            var(--text_white),
+            var(--text_white)
+          );
+        }
+        h2 {
+          font-size: 16px;
+          position: relative;
+          z-index: 2;
+          top: -12px;
+          padding-right: 3px;
+        }
+      }
+      .con {
+        width: 100%;
+      }
+    }
+  }
+}
+//////////////////////////////////////////////////////
+.inputUrl {
+  background-color: var(--text_op);
+  width: 100%;
+  max-width: 300px;
+  padding: 3px;
+  height: 28px;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  color: var(--text_white);
+  text-indent: 10px;
+  display: flex;
+  input {
+    height: 22px;
+    padding: 0 6px;
+    width: 100%;
+    display: block;
+  }
+}
+.inputBox {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 4px dashed var(--text_op);
+  // background-color:var(--text_op) ;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
+
+  .gifBox {
+    padding: 10px;
+    margin: 6px;
+    width: 210px;
+    background-color: var(--text_op);
+    border-radius: 6px;
+    display: flex;
+    position: relative;
+
+    .img {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .info {
+      width: 100%;
+      padding: 0 0 0 12px;
+    }
+    .name {
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    p {
+      font-size: 12px;
+      font-weight: 200;
+      opacity: 0.7;
+      padding-top: 3px;
+    }
+  }
+}
+.inputBox,
+.commandsBox {
+  // background-color: red;
+  i,
+  .del {
+    opacity: 0;
+    transition: 0.3s;
+  }
+  &:hover {
+    i,
+    .del {
+      opacity: 1;
+    }
+  }
+  .del {
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    background-color: brown;
+    width: 22px;
+    // height: 20px;
+    line-height: 20px;
+    border-radius: 50% !important;
+    text-align: center;
+  }
+}
+
+.gifBoxInputBut {
+  width: 200px;
+  max-height: 100% !important;
+  min-height: 120px;
+  height: 100%;
+  border: 3px solid var(--color_op2) !important;
+  color: var(--color_op2) !important;
+  border-radius: 6px;
+  margin: 6px;
+  font-size: 90px !important;
+  &:hover {
+    background-color: var(--text_op1);
+  }
+}
+
+.commandsBox {
+  position: relative;
+  padding-bottom: 6px;
+  textarea {
+    height: auto;
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 900;
+    border-radius: 6px;
+    color: var(--color);
+    background-color: var(--text_op);
+    background-origin: padding-box;
+    letter-spacing: 0.5px;
+  }
+}
+
+.outputBox {
+  width: 100%;
+  .gifBox {
+    display: flex;
+    flex-wrap: wrap;
+    & > div {
+      padding: 15px 15px 0 0;
+    }
+  }
+  img {
+    margin-top: 5px;
+    width: 300px;
+  }
+  b {
+    font-size: 16px;
+  }
+  h3 {
+    //   padding-bottom: 10px;
+  }
+  p {
+    line-height: 20px;
+    span {
+      padding-right: 10px;
+      opacity: 0.6;
+    }
+  }
+}
+
+.button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: initial;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: transparent;
+  color: var(--text_white);
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 4px 15px;
+  max-height: 36px;
+  font-weight: 900;
+
+  &.size1 {
+    padding: 2px 8px;
+    max-height: 22px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  &.size2 {
+    padding: 8px 18px;
+    height: 42px;
+    font-size: 18px;
+    border-radius: 6px;
+  }
+  &.on,
+  &:hover {
+    filter: contrast(200%);
+  }
+  &:active {
+    filter: contrast(300%);
+    transform: translateY(1px);
+  }
+  &.color {
+    background-color: var(--color);
+    color: var(--text);
+  }
+  &.sub {
+    background-color: var(--text_op);
+    color: var(--color);
+  }
+}
+
+.run {
+  background: url("https://media.giphy.com/media/5noegfOBr5YHn4wYAM/giphy.gif")
+    center center no-repeat;
+  background-size: 70px auto;
+}
+
+#file {
+  display: none;
+}
+
+//////////////////////////////////////////
+
+@media only screen and (max-width: 820px) {
+  main {
+    width: 100%;
+  }
+  main .block.step {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  main .block.step .title {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 0 0 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--text_op2);
+  }
+  main .shareBox:not(.copy) {
+    width: 80px;
+    height: 100px;
+    font-weight: 900;
+    font-size: 12px;
+    bottom: -18px;
+    .icon {
+      margin-bottom: 5px;
+      width: 30px;
+      height: 30px;
+      background-color: cadetblue;
+      border-radius: 50%;
+      flex-shrink: 0;
+      i {
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+    "name": "gifsicle-wasm-browser",
+    "version": "1.0.3",
+    "description": "Run Gifsicle in browser，Compress, rotate, crop and other operations on Gif images",
+    "homepage": "https://github.com/renzhezhilu/gifsicle-wasm-browser",
+    "author": {
+        "name": "renzhezhilu",
+        "github": "https://github.com/renzhezhilu"
+    },
+    "keywords": [
+        "gifsicle",
+        "gifsicle wasm",
+        "gifsicle browser",
+        "gifsicle WebAssembly",
+        "gif browser",
+        "compress gif",
+        "crop gif",
+        "merge gif",
+        "resize gif",
+        "extract gif frame"
+    ],
+    "main": "./dist/gifsicle.min.js",
+    "scripts": {
+        "start": "node ./gifsicle.min.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/renzhezhilu/gifsicle-wasm-browser.git"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": "*"
+    },
+    "files": [
+        "dist/gifsicle.min.js",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "dependencies": {},
+    "devDependencies": {}
+}

@@ -1,0 +1,13 @@
+:root{
+    --text:rgb(24, 25, 27);
+    --text_op1:rgba(24, 25, 27,.1);
+    --text_op2:rgba(24, 25, 27,.2);
+    --text_op:rgba(24, 25, 27,.7);
+    --text_white_op1:rgba(255,255,255,.1);
+    --text_white:rgba(255,255,255,.9);
+    --color:rgb(32, 156, 176);
+    --color_op1:rgba(32, 156, 176,.1);
+    --color_op2:rgba(32, 156, 176,.2);
+    --color_op:rgba(32, 156, 176,.5);
+}
+

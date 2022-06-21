@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gifsicle Wasm Broswer</title>
+    <link rel="shortcut icon" href="favicon.png" />
+    <!--  -->
+    <script type="module">
+        import "./js/index.js";
+    </script>
+    <!--  -->
+    <link rel="stylesheet/less" type="text/css" href="./css/index.less" />
+    <script src="./js/less.js"></script>
+    <!-- <script src="./js/pxmu.min.js"></script> -->
+
+    <!--  -->
+</head>
+
+<body class="">
+    <div id="app">
+        <div>
+            <input id="file" type="file" accept=".gif" multiple>
+
+            <header>
+                <nav class="flex_center2">
+                    <a target="_blank" href="https://github.com/renzhezhilu/gifsicle-wasm-browser">
+                        <img alt="GitHub stars"
+                            src="https://img.shields.io/github/stars/renzhezhilu/gifsicle-wasm-browser?style=social">
+                    </a>
+                    <span>|</span>
+                    <a href="" target="_blank">Github</a>
+                    <span>|</span>
+                    <a href="" target="_blank">Npm</a>
+                    <span>|</span>
+                    <a href="" target="_blank">More</a>
+                </nav>
+                <h1>Gifsicle Wasm Broswer</h1>
+                <p>Compress, rotate, crop and other operations on Gif images</p>
+            </header>
+            <main v-if="isLoadedPage">
+                <div  class="shareBox " :class="{'show':isShare,'copy':isCopyShare}">
+                    <div class="w100 flex_column" @click="isShare?isCopyShare=true:notCanCopyShare()">
+                        <div   class="icon flex_center2">
+                            <i class="i ri:code-s-slash-fill"></i>
+                        </div>
+                        <p  >
+                            Creat <br />
+                            Demo Url
+                        </p>
+                    </div>
+                   
+                    <div v-show="isCopyShare">
+                        <br>
+                        <a  :href="shareUrl" target="_blank">
+                            {{shareUrl.slice(0,70)}}...
+                        </a>
+                        <br>
+                        <br>
+                       <div class="flex_center2">
+                        <button 
+                        @click="copyShare" 
+                        class="button size2 color mr10">
+                            Copy 
+                        </button>
+                        <button 
+                        @click.stop="isCopyShare=false"
+                        class="button size2 sub">
+                           <!-- Close -->
+                           <i class="i ri:close-line"></i>
+                        </button>
+                       </div>
+                    </div>
+                </div>
+                <div class="block step">
+                    <div class="title">
+                        <p>01</p>
+                        <h2>Input gif files</h2>
+                    </div>
+                    <div class="con">
+                        <div class="flex_center wrap fs12">
+                            <div class="mr10">
+                                Drop Gif here or
+
+                                <button @click="getRandomUrl()" class="button color size1 op5">
+                                    <small>Random</small>
+                                </button>
+                                Gif or
+                            </div>
+                            <div class="inputUrl fs0">
+                                <input v-select v-model="webUrl" placeholder="Input Gif Url" class="" type="text" />
+                                <button @click="addGif(webUrl)" class="button color size1 op5">
+                                    <small>Get</small>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="inputBox">
+                            <div v-for="(gif,index) in input" :key="gif.id" class="gifBox">
+                                <button @click="del(index,input)" class="del button size1">
+                                    <i class="i ri:close-line"></i>
+                                </button>
+                                <div class="img">
+                                    <img :src="gif.url" alt="" />
+                                </div>
+                                <div class="info">
+                                    <div v-if="!gif.isEditName" @click="gif.isEditName=true" class="name">
+                                        {{gif.name}}
+                                        <i class="i ri:check-line"></i>
+                                    </div>
+                                    <div v-else>
+                                        <input v-focus-select class="edit" v-model="gif.name"
+                                            @blur="gif.isEditName=false" @keyup.enter="gif.isEditName=false"
+                                            type="text" />
+                                    </div>
+                                    <p>{{gif.width}}x{{gif.height}}</p>
+                                    <p>{{gif.size}}</p>
+                                    <p>{{gif.time}} / {{gif.frame}}P</p>
+                                    <p>Loop: {{gif.loop}}</p>
+                                    <p>Colors: {{gif.palettet}}</p>
+                                </div>
+                            </div>
+                            <button 
+                            @click="document.getElementById('file').click()" class="gifBoxInputBut button">
+                                <span class="iconText">+</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block step">
+                    <div class="title">
+                        <p>02</p>
+                        <h2>Input commands</h2>
+                    </div>
+                    <div class="con">
+                        <div v-for="(item,index) in command" :key="index" class="commandsBox">
+                            <textarea placeholder="Input command" v-model="item.value" rows="2"></textarea>
+                            <button @click="del(index,command)" class="del button size1">
+                                <i class="i ri:close-line"></i>
+                            </button>
+                        </div>
+                        <br />
+                        <button @click="run()" class="button color size2 mr10 run">
+                            Run</button>
+                        <button @click="add({value:''},command)" class="button sub size2">
+                            <span class="iconText">+</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="block step">
+                    <div class="title">
+                        <p>03</p>
+                        <h2>Output</h2>
+                    </div>
+                    <div class="con">
+                        <div class="green" v-if="outputInfo.isDone">
+                            <h2 class="op8 flex_center">
+                                <i class="i ri:check-line mr5"></i>
+                                <span class="mr5">
+                                    Done!
+                                </span>
+                                <span class="mr5">
+                                    {{outputInfo.count}}
+                                </span>
+                                <span class="mr5">
+                                    Gif{{outputInfo.count>1?'s':''}} take
+                                </span>
+                                <span class="mr5">
+                                    {{outputInfo.time}}s
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="red" v-if="outputInfo.isError">
+                            <h2 class="op8 flex_center">
+                                <i class="i ri:error-warning-line mr5"></i>
+                                Error！{{outputInfo.errorInfo}}
+                            </h2>
+                        </div>
+                        <div class="outputBox">
+                            <div class="gifBox">
+                                <div v-for="(outGif,index) in output">
+                                    <p>
+                                        <b>{{outGif.name}}</b>
+                                    </p>
+                                    <p>
+                                        <span>{{outGif.width}}x{{outGif.height}}</span>
+                                        <span>{{outGif.size}}</span>
+                                        <span>{{outGif.time}} / {{outGif.frame}}p </span>
+                                        <span>Loop: {{outGif.loop}}</span>
+                                        <span>Colors: {{outGif.palettet}}</span>
+                                    </p>
+                                    <img :src="outGif.url" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<style>
+    #file {
+    border: var(--color) dashed 3px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+}
+</style>
