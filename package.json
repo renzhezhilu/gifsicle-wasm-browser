@@ -1,6 +1,6 @@
 {
   "name": "gifsicle-wasm-browser",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Run Gifsicle in browser，Compress, rotate, crop and other operations on Gif images",
   "homepage": "https://github.com/renzhezhilu/gifsicle-wasm-browser",
   "author": {

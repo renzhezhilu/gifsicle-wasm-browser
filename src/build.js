@@ -15,8 +15,15 @@ function build() {
     version = updateVersionNum(version)
     let package = fs.readFileSync('../package.json').toString()
     package = package.replace(/(?<=version\"\: \").*?(?=\")/ig, version)
+    let serviceWorker = fs.readFileSync('../docs/js/service-worker.js').toString()
+    serviceWorker = serviceWorker.replace(
+        /(?<=PRECACHE \= \').*?(?=\')/ig,
+        version
+    )
     fs.writeFileSync('./version', version)
     fs.writeFileSync('../package.json', package)
+    fs.writeFileSync('../docs/js/service-worker.js', serviceWorker)
+    
     ////////////////
     let aut = `/* 
     gifsicle-wasm-browser 
