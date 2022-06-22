@@ -565,7 +565,7 @@ function pErr(text="Error") {
         animation: 'slidedown', 
         type: 'web', 
         bg:'red',
-        color:'var(--text_white)',
+        color:'var(--text)',
         status: 'success', 
     });
 }

@@ -1,5 +1,5 @@
-import gifsicle from './gifsicle.min.js'
-// import gifsicle from '../../src/index.js'
+// import gifsicle from './gifsicle.min.js'
+import gifsicle from '../../src/index.js'
 export default {
 
     // 倒反
@@ -223,7 +223,9 @@ export default {
             }).then(async d => {
                 let file = d[0]
                 // console.log(file);
-                let text = await file.text()
+                // let text = await file.text()
+                let text = await new Response(file).text()
+
                 // console.log(text);
                 try {
                     let getF = frames(text)

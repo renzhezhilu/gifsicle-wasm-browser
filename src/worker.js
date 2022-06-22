@@ -1,9 +1,12 @@
 importScripts("gifsicle.js");
 onmessage = function (e) {
+
   const main = async () => {
     let outputU8Data = await gifsicle(
       e.data
-    ).catch((_) => null);
+    ).catch((err) => {
+      postMessage(err);
+    });
 
     postMessage(outputU8Data);
   };

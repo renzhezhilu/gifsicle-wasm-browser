@@ -262,13 +262,11 @@ main {
 .inputBox,
 .commandsBox {
   // background-color: red;
-  i,
   .del {
     opacity: 0;
     transition: 0.3s;
   }
   &:hover {
-    i,
     .del {
       opacity: 1;
     }
@@ -288,15 +286,20 @@ main {
 }
 
 .gifBoxInputBut {
-  width: 200px;
+  width: 220px;
   max-height: 100% !important;
   min-height: 140px;
   height: 100%;
   border: 3px solid var(--color_op2) !important;
-  color: var(--color_op2) !important;
+  color: var(--color) !important;
   border-radius: 6px;
   margin: 6px;
-  font-size: 90px !important;
+  i{
+  font-size: 80px !important;
+  line-height: 70px;
+  font-weight: 900;
+
+  }
   &:hover {
     background-color: var(--text_op1);
   }
@@ -372,10 +375,9 @@ main {
   font-weight: 900;
 
   &.size1 {
-    padding: 2px 12px;
-    max-height: 36px;
-    height: 36px;
-    font-size: 14px;
+    padding: 2px 8px;
+    height: 22px;
+    font-size: 13px;
     border-radius: 4px;
   }
   &.size2 {

@@ -1,4 +1,3 @@
-// 增加耗时
 let gifsicle = {
 	tool: {
 		workerLocalUrl: '',
@@ -131,26 +130,38 @@ let gifsicle = {
 	},
 	run(obj = {}) {
 		return new Promise(async (res, rej) => {
-			let { input = [], command = "", folder = [], start = _ => { } } = obj
+			let {
+				input = [],
+				command = "",
+				folder = [],
+				isStrict = false,
+				timeout = 100,
+				start = _ => { }
+			} = obj
 			let workerUrl = await this.tool.textToUrl();
+			let myWorker = new Worker(workerUrl);
+
 			let newCommand = this.tool.loadCommand(command);
 			let newFiles = await this.tool.loadFile(input);
 			start(newFiles)
 			let newFolder = await this.tool.loadFolder(folder);
+
+			
+
 			console.log(newCommand);
 			console.log(newFiles);
 			console.log(workerUrl);
-			let myWorker = new Worker(workerUrl);
 			myWorker.postMessage({
 				data: newFiles,
 				command: newCommand,
 				folder: newFolder,
+				isStrict,
 			});
 			// 量化转换
 			myWorker.onmessage = async function (e) {
-				if (!e.data) {
+				if (!e.data || typeof e.data === 'string') {
 					myWorker.terminate();
-					res(null);
+					rej(e.data);
 					return;
 				}
 				let outArr = [];

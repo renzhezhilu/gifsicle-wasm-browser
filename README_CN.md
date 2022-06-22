@@ -19,7 +19,7 @@
 
 通过 Gifsicle 的 node.js 版本[wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle)修改而来。
 
-<img src="./docs/ui.jpg" >
+<img src="./docs/images/ui.webp" >
 
 # 目录
 

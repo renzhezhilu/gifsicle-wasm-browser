@@ -1,6 +1,6 @@
 // https://googlechrome.github.io/samples/service-worker/basic/
 
-const PRECACHE = '1.1.2';
+const PRECACHE = '1.1.3';
 const RUNTIME = 'runtime';
 
 const PRECACHE_URLS = [

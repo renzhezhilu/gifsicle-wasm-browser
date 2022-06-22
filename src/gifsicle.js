@@ -4122,13 +4122,29 @@ var gifsicle = (function () {
      * @returns {Buffer} Processed image buffer
      */
     const encode = async (obj = {}) => {
-        let { data = null, command = [], folder = [] } = obj;
+        let {
+            data = null,
+            command = [],
+            folder = [],
+            isStrict = false,
+        } = obj;
         await initModule();
         return new Promise((resolve, reject) => {
             let resolved = false;
+            let err = ''
+           
             gifsicle_c({
                 stdout: _io.stdout,
-                stderr: _io.stderr,
+                // stderr: _io.stderr,
+                stderr: (char) => {
+                    err += String.fromCharCode(char);
+                    if (char === 10) {
+                        console.error(err);
+                        if (isStrict) {
+                            reject(err)
+                        }
+                    }
+                },
                 arguments: command,
                 // input: new Uint8Array(image.buffer),
                 input: data,

@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <title>Gifsicle Wasm Broswer</title>
+    <title>Gifsicle Wasm Broswer 222</title>
     <link rel="shortcut icon" href="favicon.png" />
     <meta name="description"
-        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. Gif images">
+        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. GIFs images">
     <meta name="keywords"
-        content="gifsicle,gifsicle wasm,gifsicle browser,gifsicle WebAssembly,gif browser,compress gif,crop gif,merge gif,resize gif,extract gif frame">
+        content="gifsicle,gifsicle wasm,gifsicle browser,gifsicle WebAssembly,GIFs browser,compress gif,crop gif,merge gif,resize gif,extract GIFs frame">
     <meta name="author" content="https://github.com/renzhezhilu" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://renzhezhilu.github.io/gifsicle-wasm-browser" />
@@ -20,7 +20,7 @@
     <meta name="twitter:domain" content="https://renzhezhilu.github.io/gifsicle-wasm-browser" />
     <meta name="twitter:title" property="og:title" itemprop="name" content="Gifsicle Wasm Broswer" />
     <meta name="twitter:description" property="og:description" itemprop="description"
-        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. Gif images." />
+        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. GIFs images." />
     <!------------------------->
     <script type="module">
         import "./js/index.js";
@@ -62,7 +62,7 @@
                 </nav>
                 <h1>Gifsicle Wasm Broswer</h1>
                 <p>Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames,
-                    resize, etc. Gif images.</p>
+                    resize, etc. GIFs images.</p>
             </header>
             <main v-if="isLoadedPage">
                 <div class="shareBox " :class="{'show':isShare,'copy':isCopyShare}">
@@ -100,26 +100,25 @@
                 <div class="block step">
                     <div class="title">
                         <p>01</p>
-                        <h2>Input gif files</h2>
+                        <h2>Input GIFs files</h2>
                     </div>
                     <div class="con">
+
                         <div class="flex_center wrap fs12">
                             <div class="mr10 mb10">
-                                Drop Gif here or
 
                                 <!-- <button @click="getRandomUrl()" class="button color size1 op5">
                                     <small>Random</small>
                                 </button> -->
-                                <select class="button color size1 op6" v-model="selectedUrl" @change="getRandomUrl">
-                                    <option :value="null">Try these GIFs</option>
+                                <select style="height: 26px;" class="button color size1 op6" v-model="selectedUrl" @change="getRandomUrl">
+                                    <option  :value="null">Try these GIFs</option>
                                     <option v-for="(item,index) in randomUrlOut" :key="item.url" :value="index">
                                         {{item.sizeText}}
                                     </option>
                                 </select>
-                                Gif or
                             </div>
                             <div class="inputUrl fs0 mb10">
-                                <input v-select v-model="webUrl" placeholder="Input Gif Url" class="" type="text" />
+                                <input v-select v-model="webUrl" placeholder="Input GIFs Url" class="" type="text" />
                                 <button @click="addGif(webUrl)" class="button color size1 op5">
                                     <small>Get</small>
                                 </button>
@@ -152,7 +151,11 @@
                                 </div>
                             </div>
                             <button @click="document.getElementById('file').click()" class="gifBoxInputBut button">
-                                <span class="iconText">+</span>
+                                <div class="flex_column">
+                                    <i class="i ri:add-line"></i>
+                                    <!-- <span class="iconText">+</span> -->
+                                <p class="fs14">Drop GIFs here <br> or Select</p>
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -212,7 +215,7 @@
                             </h2>
                         </div>
                         <div class="flex_between mt10" v-if="outputInfo.isDone">
-                            <button @click="download()" class="button size1 sub ">
+                            <button @click="download()" style="max-height:36px;height:36px;" class="button  sub ">
                                 <i class="i ri:download-2-line"></i>
                                 <span class="ml5">Donwload</span>
                             </button>
@@ -261,9 +264,9 @@
                         <p>04</p>
                         <h2>Code </h2>
                     </div>
-                    <div class="con" v-if="code">
+                    <div class="con" v-if="code && outputInfo.isDone">
                         <div class="flex_between mb10" v-if="outputInfo.isDone">
-                            <button @click="copyCode()" class="button size1 sub ">
+                            <button @click="copyCode()" style="max-height:36px;height:36px;" class="button  sub ">
                                 <i class="i ri:file-copy-line"></i>
                                 <span class="ml5">Copy code</span>
                             </button>

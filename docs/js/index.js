@@ -1,6 +1,6 @@
 import Vue from './vue.esm.browser.2.6.js'
-import gifsicle from './gifsicle.min.js'
-// import gifsicle from '../../src/index.js'
+// import gifsicle from './gifsicle.min.js'
+import gifsicle from '../../src/index.js'
 import gifsicleTool from './gifsicleTool.js'
 import tool from './tool.js'
 import UZIP from './uzip.js'
@@ -471,6 +471,12 @@ gifsicle.run({
                 //     pErr(err)
                 // })
 
+            }).catch(err=>{
+                this.outputInfo.isDone = false
+                this.outputInfo.isError = true
+                this.outputInfo.errorInfo = err
+                pErr(err)
+                pClose()
             })
         },
         editName(index, name) {
