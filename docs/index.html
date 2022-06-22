@@ -3,26 +3,45 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name=viewport content="width=device-width,initial-scale=1">
     <title>Gifsicle Wasm Broswer</title>
     <link rel="shortcut icon" href="favicon.png" />
-    <!--  -->
+    <meta name="description"
+        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. Gif images">
+    <meta name="keywords"
+        content="gifsicle,gifsicle wasm,gifsicle browser,gifsicle WebAssembly,gif browser,compress gif,crop gif,merge gif,resize gif,extract gif frame">
+    <meta name="author" content="https://github.com/renzhezhilu" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://renzhezhilu.github.io/gifsicle-wasm-browser" />
+    <meta property="og:site_name" content="Gifsicle Wasm Broswer" />
+    <meta property="og:image" itemprop="image primaryImageOfPage"
+        content="https://renzhezhilu.github.io/gifsicle-wasm-browser/images/ui.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:domain" content="https://renzhezhilu.github.io/gifsicle-wasm-browser" />
+    <meta name="twitter:title" property="og:title" itemprop="name" content="Gifsicle Wasm Broswer" />
+    <meta name="twitter:description" property="og:description" itemprop="description"
+        content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. Gif images." />
+    <!------------------------->
     <script type="module">
         import "./js/index.js";
     </script>
     <!--  -->
     <link rel="stylesheet/less" type="text/css" href="./css/index.less" />
     <script src="./js/less.js"></script>
-    <!-- <script src="./js/pxmu.min.js"></script> -->
-
-    <!--  -->
+    <!------------------------->
+    <script>
+        let isSuppSW = 'serviceWorker' in navigator
+        let isDev = ['127.0.0.1', 'localhost'].includes(location.hostname)
+        if (isSuppSW && !isDev) {
+            navigator.serviceWorker.register('./js/service-worker.js');
+        }
+    </script>
 </head>
 
 <body class="">
     <div id="app">
         <div>
             <input id="file" type="file" accept=".gif" multiple>
-
             <header>
                 <nav class="flex_center2">
                     <a target="_blank" href="https://github.com/renzhezhilu/gifsicle-wasm-browser">
@@ -30,47 +49,44 @@
                             src="https://img.shields.io/github/stars/renzhezhilu/gifsicle-wasm-browser?style=social">
                     </a>
                     <span>|</span>
-                    <a href="" target="_blank">Github</a>
+                    <a href="https://github.com/renzhezhilu/gifsicle-wasm-browser" target="_blank">Github</a>
                     <span>|</span>
-                    <a href="" target="_blank">Npm</a>
+                    <a href="https://www.npmjs.com/package/gifsicle-wasm-browser" target="_blank">Npm</a>
                     <span>|</span>
-                    <a href="" target="_blank">More</a>
+                    <a href="https://github.com/renzhezhilu/gifsicle-wasm-browser#example" target="_blank">More Demo</a>
                 </nav>
                 <h1>Gifsicle Wasm Broswer</h1>
-                <p>Compress, rotate, crop and other operations on Gif images</p>
+                <p>Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames,
+                    resize, etc. Gif images.</p>
             </header>
             <main v-if="isLoadedPage">
-                <div  class="shareBox " :class="{'show':isShare,'copy':isCopyShare}">
-                    <div class="w100 flex_column" @click="isShare?isCopyShare=true:notCanCopyShare()">
-                        <div   class="icon flex_center2">
+                <div class="shareBox " :class="{'show':isShare,'copy':isCopyShare}">
+                    <div class="w100 flex_column" @click="isShare?isCopyShare=true:notCanCopyShare();creatShare()">
+                        <div class="icon flex_center2">
                             <i class="i ri:code-s-slash-fill"></i>
                         </div>
-                        <p  >
+                        <p>
                             Creat <br />
                             Demo Url
                         </p>
                     </div>
-                   
+
                     <div v-show="isCopyShare">
                         <br>
-                        <a  :href="shareUrl" target="_blank">
+                        <a :href="shareUrl" target="_blank">
                             {{shareUrl.slice(0,70)}}...
                         </a>
                         <br>
                         <br>
-                       <div class="flex_center2">
-                        <button 
-                        @click="copyShare" 
-                        class="button size2 color mr10">
-                            Copy 
-                        </button>
-                        <button 
-                        @click.stop="isCopyShare=false"
-                        class="button size2 sub">
-                           <!-- Close -->
-                           <i class="i ri:close-line"></i>
-                        </button>
-                       </div>
+                        <div class="flex_center2">
+                            <button @click="copyShare" class="button size2 color mr10">
+                                Copy
+                            </button>
+                            <button @click.stop="isCopyShare=false" class="button size2 sub">
+                                <!-- Close -->
+                                <i class="i ri:close-line"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="block step">
@@ -80,15 +96,21 @@
                     </div>
                     <div class="con">
                         <div class="flex_center wrap fs12">
-                            <div class="mr10">
+                            <div class="mr10 mb10">
                                 Drop Gif here or
 
-                                <button @click="getRandomUrl()" class="button color size1 op5">
+                                <!-- <button @click="getRandomUrl()" class="button color size1 op5">
                                     <small>Random</small>
-                                </button>
+                                </button> -->
+                                <select class="button color size1 op6" v-model="selectedUrl" @change="getRandomUrl">
+                                    <option :value="null">Try these GIFs</option>
+                                    <option v-for="(item,index) in randomUrlOut" :key="item.url" :value="index">
+                                        {{item.sizeText}}
+                                    </option>
+                                </select>
                                 Gif or
                             </div>
-                            <div class="inputUrl fs0">
+                            <div class="inputUrl fs0 mb10">
                                 <input v-select v-model="webUrl" placeholder="Input Gif Url" class="" type="text" />
                                 <button @click="addGif(webUrl)" class="button color size1 op5">
                                     <small>Get</small>
@@ -107,7 +129,7 @@
                                 <div class="info">
                                     <div v-if="!gif.isEditName" @click="gif.isEditName=true" class="name">
                                         {{gif.name}}
-                                        <i class="i ri:check-line"></i>
+                                        <i class="i ri:edit-2-fill"></i>
                                     </div>
                                     <div v-else>
                                         <input v-focus-select class="edit" v-model="gif.name"
@@ -121,8 +143,7 @@
                                     <p>Colors: {{gif.palettet}}</p>
                                 </div>
                             </div>
-                            <button 
-                            @click="document.getElementById('file').click()" class="gifBoxInputBut button">
+                            <button @click="document.getElementById('file').click()" class="gifBoxInputBut button">
                                 <span class="iconText">+</span>
                             </button>
                         </div>
@@ -141,12 +162,14 @@
                                 <i class="i ri:close-line"></i>
                             </button>
                         </div>
-                        <br />
-                        <button @click="run()" class="button color size2 mr10 run">
-                            Run</button>
-                        <button @click="add({value:''},command)" class="button sub size2">
-                            <span class="iconText">+</span>
-                        </button>
+                        <div class="flex_center mt10">
+                            <button @click="run()" class="button color size3 mr10 run">
+                                <i class="i ri:play-fill mr5"></i>
+                                Run</button>
+                            <button @click="add({value:''},command)" class="button sub size3">
+                                <span class="iconText">+</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -154,6 +177,8 @@
                     <div class="title">
                         <p>03</p>
                         <h2>Output</h2>
+                        <input v-if="outputInfo.isDone" type="range" v-model="outputViewZomm" min="0.1" max="2"
+                            step="0.1" name="" id="">
                     </div>
                     <div class="con">
                         <div class="green" v-if="outputInfo.isDone">
@@ -179,9 +204,20 @@
                                 Error！{{outputInfo.errorInfo}}
                             </h2>
                         </div>
-                        <div class="outputBox">
-                            <div class="gifBox">
-                                <div v-for="(outGif,index) in output">
+                        <div class="outputBox" :style="`zoom:${outputViewZomm}`">
+                            <div v-for="(outGif,index) in output" class="gifBox" :class="{'w100':outGif.isTxt}">
+                                <div class="w100" v-if="outGif.isTxt">
+                                    <p>
+                                        <b>{{outGif.name}}</b>
+                                    </p>
+                                    <p class="w100">
+                                        <textarea :style="`height: ${outGif.text.split('\n').length*18}px;`"
+                                            class="w100">
+                                        {{outGif.text}}
+                                    </textarea>
+                                    </p>
+                                </div>
+                                <div v-else>
                                     <p>
                                         <b>{{outGif.name}}</b>
                                     </p>
@@ -204,12 +240,3 @@
 </body>
 
 </html>
-
-<style>
-    #file {
-    border: var(--color) dashed 3px;
-    border-radius: 10px;
-    width: 100%;
-    padding: 10px;
-}
-</style>

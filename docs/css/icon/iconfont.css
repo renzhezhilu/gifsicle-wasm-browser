@@ -24,23 +24,59 @@
 content: "\e001";
 }
 
-.i.ri\:close-line:before {
+.i.ri\:checkbox-circle-fill:before {
 content: "\e002";
 }
 
-.i.ri\:code-s-slash-fill:before {
+.i.ri\:close-line:before {
 content: "\e003";
 }
 
-.i.ri\:download-2-line:before {
+.i.ri\:code-s-slash-fill:before {
 content: "\e004";
 }
 
-.i.ri\:error-warning-fill:before {
+.i.ri\:download-2-line:before {
 content: "\e005";
 }
 
-.i.ri\:error-warning-line:before {
+.i.ri\:edit-2-fill:before {
 content: "\e006";
+}
+
+.i.ri\:error-warning-fill:before {
+content: "\e007";
+}
+
+.i.ri\:error-warning-line:before {
+content: "\e008";
+}
+
+.i.ri\:file-copy-fill:before {
+content: "\e009";
+}
+
+.i.ri\:file-copy-line:before {
+content: "\e00a";
+}
+
+.i.ri\:palette-fill:before {
+content: "\e00b";
+}
+
+.i.ri\:palette-line:before {
+content: "\e00c";
+}
+
+.i.ri\:play-fill:before {
+content: "\e00d";
+}
+
+.i.ri\:time-fill:before {
+content: "\e00e";
+}
+
+.i.ri\:time-line:before {
+content: "\e00f";
 }
 

@@ -1,8 +1,25 @@
 // 增加耗时
 let gifsicle = {
 	tool: {
+		workerLocalUrl: '',
+		workerBlobUrl: '',
 		worker() {
-			return `../src/worker.js`;
+			if (this.workerBlobUrl) {
+				return this.workerBlobUrl
+			} else {
+				if (!this.workerLocalUrl) {
+					this.workerBlobUrl = '../src/worker.js'
+				} else {
+					this.workerBlobUrl = URL.createObjectURL(new Blob([this.workerLocalUrl]));
+				}
+				return this.workerBlobUrl
+			}
+			// if (this.workerUrl) return this.workerUrl
+			// else {
+			// 	this.workerUrl = URL.createObjectURL(new Blob([this.defUrl]));
+			// }
+			// return this.workerUrl
+			// return `../src/worker.js`;
 		},
 		errorLink() {
 			return " \n Check: https://github.com/renzhezhilu/gifsicle-wasm-browser";
@@ -16,15 +33,15 @@ let gifsicle = {
 					.toLowerCase();
 		},
 		async textToUrl(text) {
-			let isBuild = false;
-			let workerUrl = "";
-			if (isBuild) {
-				workerUrl = URL.createObjectURL(new Blob([this.worker()]));
-			} else {
-				workerUrl = this.worker();
-			}
-			console.log(workerUrl);
-			return workerUrl;
+			// let isBuild = false;
+			// let workerUrl = "";
+			// if (isBuild) {
+			// 	workerUrl = URL.createObjectURL(new Blob([this.worker()]));
+			// } else {
+			// 	workerUrl = this.worker();
+			// }
+			// console.log(workerUrl);
+			return this.worker();
 		},
 		loadCommand(command) {
 			let type = this.testType(command);
@@ -54,7 +71,8 @@ let gifsicle = {
 				}
 				// blob
 				else if (["blob", "file"].includes(type)) {
-					file.arrayBuffer().then((d) => res(d));
+					// file.arrayBuffer().then((d) => res(d));
+					new Response(file).arrayBuffer().then((d) => res(d));
 				}
 				// arraybuffer
 				else if (["arraybuffer"].includes(type)) {
@@ -113,7 +131,7 @@ let gifsicle = {
 	},
 	run(obj = {}) {
 		return new Promise(async (res, rej) => {
-			let { input = [], command = "", folder = [] , start=_=>{}} = obj 
+			let { input = [], command = "", folder = [], start = _ => { } } = obj
 			let workerUrl = await this.tool.textToUrl();
 			let newCommand = this.tool.loadCommand(command);
 			let newFiles = await this.tool.loadFile(input);

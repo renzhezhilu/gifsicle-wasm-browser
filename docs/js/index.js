@@ -1,8 +1,9 @@
 import Vue from './vue.esm.browser.2.6.js'
-// import gifsicle from './gifsicle.min.js'
-import gifsicle from '../../src/index.js'
+import gifsicle from './gifsicle.min.js'
+// import gifsicle from '../../src/index.js'
 import gifsicleTool from './gifsicleTool.js'
 import tool from './tool.js'
+
 import {
     pxmu,
     pLoading,
@@ -88,6 +89,9 @@ var app = new Vue({
                 'https://media.giphy.com/media/l3nSIMrTlKxFL9UGI/giphy.gif',
                 'https://media.giphy.com/media/2F0IsIg0lHveE/giphy.gif',
             ],
+            randomUrlOut: [],
+            selectedUrl: null,
+            outputViewZomm: 1,
         };
     },
     async created() {
@@ -105,8 +109,31 @@ var app = new Vue({
         // }, 3000);
         this.inputFilePageEvent()
         this.parseShare()
+        this.setRandomUrl()
     },
     methods: {
+        setRandomUrl() {
+            for (let i = 0; i < this.randomUrl.length; i++) {
+                const url = this.randomUrl[i];
+                tool.getWebUrlSize(url, size => {
+                    this.randomUrlOut.push({
+                        url,
+                        sizeText: tool.getFileSize(size),
+                        size: size,
+                        name: `${i + 1}.gif`
+                    })
+                    this.randomUrlOut.sort((a, b) => a.size - b.size)
+                    this.randomUrlOut = this.randomUrlOut.map((m, index) => {
+                        m.name = `${index + 1}.gif`
+                        return m
+                    })
+
+                    if (this.randomUrlOut.length === this.randomUrl.length) {
+                        console.log(this.randomUrlOut);
+                    }
+                })
+            }
+        },
         copyShare() {
             pxmu.copy(this.shareUrl);
             pOk('Copied')
@@ -129,6 +156,7 @@ var app = new Vue({
                 let data = {}
                 data.input = urls
                 data.command = this.command
+                data.zoom = this.outputViewZomm
                 data = btoa(JSON.stringify(data))
                 let site = location.origin + location.pathname
 
@@ -137,10 +165,12 @@ var app = new Vue({
             } else {
                 this.shareUrl = ''
             }
+            pClose()
+
         },
         parseShare() {
             let isCacheShare = localStorage.getItem('share')
-            let url,search,param
+            let url, search, param
             if (isCacheShare) {
                 param = new URLSearchParams(isCacheShare);
                 localStorage.removeItem('share')
@@ -168,6 +198,7 @@ var app = new Vue({
             console.log(share);
             this.input = []
             this.command = share.command
+            this.outputViewZomm = share.zoom
             let isOk = []
             for (let i = 0; i < share.input.length; i++) {
                 const item = share.input[i];
@@ -190,8 +221,9 @@ var app = new Vue({
         },
 
         getRandomUrl() {
-            let item = this.randomUrl[Math.floor(Math.random() * this.randomUrl.length)];
-            this.addGif(item)
+            if (this.selectedUrl === null) return
+            let item = this.randomUrlOut[this.selectedUrl];
+            this.addGif(item.url)
         },
         del(index, data) {
             data.splice(index, 1)
@@ -278,52 +310,116 @@ var app = new Vue({
             gifsicle.run({
                 input,
                 command,
-            }).then(outFiles => {
-                let task = outFiles.map(file => {
-                    return gifsicleTool.getInfo(file)
-                })
-                Promise.all(task).then(out => {
-                    out.map((info, index) => {
-                        console.log(info);
-                        let {
-                            height,
-                            images,
-                            loop,
-                            palettet,
-                            width,
-                            frames,
-                            size,
-                            time
-                        } = info
-                        this.output.push({
-                            name: `${outFiles[index].name}.gif`,
-                            url: URL.createObjectURL(outFiles[index]),
-                            file: outFiles[index],
-                            width,
-                            height,
-                            frame: images,
-                            size,
-                            time,
-                            loop,
-                            palettet,
-                            id: 'mmjdjks'
-                        })
-                    })
-                    this.outputInfo.time = ((new Date().getTime() - time) / 1000).toFixed(1)
-                    this.outputInfo.count = out.length
-                    this.outputInfo.isDone = true
-                    this.outputInfo.isError = false
-                    pClose()
-                    this.creatShare()
+            }).then(async outFiles => {
+                this.outputInfo.time = ((new Date().getTime() - time) / 1000).toFixed(1)
+                let outputBak = []
+                let count = 0
+                let end = _ => {
+                    count++
+                    if (outFiles.length === count) {
+                        this.outputInfo.count = outFiles.length
+                        this.outputInfo.isDone = true
+                        this.outputInfo.isError = false
+                        outputBak.sort((a, b) => a.name.localeCompare(b.name))
+                        this.output = outputBak
+                        console.log(outputBak);
+                        pClose()
+                        this.creatShare()
+                    }
+                }
 
-                }).catch(e => {
-                    let err = 'Input Error:!' + e
-                    this.outputInfo.isDone = false
-                    this.outputInfo.isError = true
-                    this.outputInfo.errorInfo = err
-                    pClose()
-                    pErr(err)
-                })
+                for (let i = 0; i < outFiles.length; i++) {
+                    const file = outFiles[i];
+                    // 文本
+                    if (file.type.includes('text')) {
+                        outputBak.push({
+                            name: `${outFiles[i].name}`,
+                            url: URL.createObjectURL(outFiles[i]),
+                            file: outFiles[i],
+                            isTxt: true,
+                            text: await tool.blobToText(outFiles[i])
+                        })
+                        end()
+                    }
+                    // 图片
+                    else {
+                        setTimeout(() => {
+                            gifsicleTool.getInfo(file).then((info) => {
+                                console.log(info);
+                                let { height, images, loop, palettet, width, frames, size, time } = info
+                                outputBak.push({
+                                    name: `${outFiles[i].name}`,
+                                    url: URL.createObjectURL(outFiles[i]),
+                                    file: outFiles[i],
+                                    width,
+                                    height,
+                                    frame: images,
+                                    size,
+                                    time,
+                                    loop,
+                                    palettet,
+                                    id: 'mmjdjks'
+                                })
+                                end()
+                            }).catch(e => {
+                                let err = 'Input Error:!' + e
+                                this.outputInfo.isDone = false
+                                this.outputInfo.isError = true
+                                this.outputInfo.errorInfo = err
+                                pClose()
+                                pErr(err)
+                                throw e
+                            })
+                        }, i * 1000 / ((navigator.hardwareConcurrency || 4) * 2.5));
+                    }
+                }
+
+
+                // let task = outFiles.map(file => {
+                //     return gifsicleTool.getInfo(file)
+                // })
+                // Promise.all(task).then(out => {
+                //     out.map((info, index) => {
+                //         console.log(info);
+                //         let {
+                //             height,
+                //             images,
+                //             loop,
+                //             palettet,
+                //             width,
+                //             frames,
+                //             size,
+                //             time
+                //         } = info
+                //         this.output.push({
+                //             name: `${outFiles[index].name}`,
+                //             url: URL.createObjectURL(outFiles[index]),
+                //             file: outFiles[index],
+                //             width,
+                //             height,
+                //             frame: images,
+                //             size,
+                //             time,
+                //             loop,
+                //             palettet,
+                //             id: 'mmjdjks'
+                //         })
+                //     })
+                //     this.outputInfo.time = ((new Date().getTime() - time) / 1000).toFixed(1)
+                //     this.outputInfo.count = out.length
+                //     this.outputInfo.isDone = true
+                //     this.outputInfo.isError = false
+                //     pClose()
+                //     this.creatShare()
+
+                // }).catch(e => {
+                //     let err = 'Input Error:!' + e
+                //     this.outputInfo.isDone = false
+                //     this.outputInfo.isError = true
+                //     this.outputInfo.errorInfo = err
+                //     pClose()
+                //     pErr(err)
+                // })
 
             })
         },
@@ -372,7 +468,7 @@ var app = new Vue({
                 // console.log('drop');
                 let isFile = _this.isFileNoPageEl(e)
                 if (!isFile) return
-                body.style.border = "13px dashed transparent"
+                body.classList.remove('drag')
                 _this.userFiles(e.dataTransfer.files)
 
             })
@@ -381,7 +477,10 @@ var app = new Vue({
                 // console.log('dragover');
                 let isFile = _this.isFileNoPageEl(e)
                 if (!isFile) return
-                body.style.border = "13px dashed var(--color)"
+                body.classList.add('drag')
+                tool.throttle.run(() => {
+                    body.classList.remove('drag')
+                }, 1000);
 
             })
             /////////////////////

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script type="module">
+    import gifsicle from './dist/gifsicle.min.js'
+    // import gifsicle from './src/index.js'
+    // import gifsicle from './ffff.js'
+    // console.log(gifsicle.tool.worker());
+
+
+
+    gifsicle.run({
+        input: [{
+            file: 'https://media.giphy.com/media/q1MeAPDDMb43K/giphy.gif',
+            name: '1.gif'
+        }],
+        command: [
+        '-e -U --resize 100x_ 1.gif -o /out/out2.gif',
+        ],
+    }).then(async files => {
+        files.map((f, indx) => {
+            let url = URL.createObjectURL(f)
+            document.querySelector('body').insertAdjacentHTML('beforeend', `
+                <span>
+                    <img src="${url}">
+                </span>
+            `);
+        })
+    })
+
+
+    function border(params) {
+        return new Promise((res, rej) => {
+        })
+    }
+    // canvasWatermark()
+    function canvasWatermark(obj = {}) {
+        return new Promise((res, rej) => {
+            let {
+                pos = 'left-top',
+                padding = 0,
+                text = '/Users/mac/github/gifsicle-wasm-browser',
+                color = 'green',
+                fontFamily = 'Arial',
+                width = 300,
+                rotate = 30,
+                canvasWidth = 600,
+                canvasHeight = 300,
+            } = obj
+
+
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            canvas.style.backgroundColor = 'yellow'
+            canvas.setAttribute('width', canvasWidth);
+            canvas.setAttribute('height', canvasHeight);
+            // 
+            let setFontSize = ctx => {
+                let size = 20
+                ctx.font = `${size}px ${fontFamily}`
+                let fWidth = ctx.measureText(text).width
+                size = width / fWidth * size
+                console.log(fWidth, size);
+                ctx.font = `${size}px ${fontFamily}`
+                return ctx.measureText(text)
+            }
+            // 
+            let fontSize = setFontSize(ctx)
+            console.log(fontSize);
+            ctx.fillStyle = color
+            ctx.textBaseline = pos.split('-')[1] === 'center' ? 'middle' : 'top'
+            console.log('rotate', rotate);
+            if (rotate) {
+                // console.log(ctx.measureText(text));
+
+                // ctx.rotate(Math.PI / 180 * rotate);
+
+                // console.log(ctx.measureText(text));
+                // ctx.translate(-100,-10)
+            }
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            console.log(ctx.textBaseline);
+            switch (pos) {
+                case 'left-top':
+                    ctx.translate(padding, padding)
+                    break;
+                case 'center-top':
+                    ctx.fillText(text, (canvasWidth - fontSize.width) / 2, padding);
+                    break;
+                case 'right-top':
+                    ctx.fillText(text, (canvasWidth - fontSize.width) - padding, padding);
+                    break;
+                case 'left-center':
+                    ctx.fillText(text, padding, (canvasHeight - fontSize.fontBoundingBoxAscent) / 2);
+                    break;
+                case 'center-center':
+                    ctx.fillText(text, (canvasWidth - fontSize.width) / 2, (canvasHeight - fontSize.fontBoundingBoxAscent) / 2);
+                    break;
+                case 'right-center':
+                    ctx.fillText(text, (canvasWidth - fontSize.width) - padding, (canvasHeight - fontSize.fontBoundingBoxAscent) / 2);
+                    break;
+
+                case 'left-bottom':
+                    ctx.fillText(text, padding, (canvasHeight - fontSize.fontBoundingBoxAscent - padding));
+                    break;
+                case 'center-bottom':
+                    ctx.fillText(text, (canvasWidth - fontSize.width) / 2, (canvasHeight - fontSize.fontBoundingBoxAscent - padding));
+                    break;
+                case 'right-bottom':
+                    ctx.fillText(text, (canvasWidth - fontSize.width - padding), (canvasHeight - fontSize.fontBoundingBoxAscent - padding));
+                    break;
+
+
+                default:
+                    break;
+            }
+            ctx.fillText(text, 0, 0);
+
+
+        })
+    }
+    function loadBar(params) {
+        return new Promise((res, rej) => {
+        })
+    }
+    // mergeGif(['../docs/2.gif', '../docs/3.gif', '../docs/t1.gif','../docs/t2.gif'], 300, 200)
+    function mergeGif(input = [], w = 100, h = 100) {
+        return new Promise(async (res, rej) => {
+            let out = []
+            let resize = input.map(m => resizeCover(m, w, h))
+            Promise.all(resize).then(d => {
+                console.log(d);
+                let input = d.map((m, index) => {
+                    return {
+                        file: m,
+                        name: `${index}.gif`
+                    }
+                })
+                let command = _ => {
+                    let str = ''
+                    input.map(m => str += ` ${m.name}`)
+                    return [
+                        `--merge  ${str} -o /out/out.gif`,
+                    ]
+                }
+                console.log(command());
+                gifsicle.run({ input, command: command() }).then(async d => {
+                    console.log(d[0]);
+                    open(URL.createObjectURL(d[0]))
+
+                })
+            })
+        })
+
+    }
+    function resizeCover(input = '../docs/1.gif', outWidth = 200, outHeight = 500) {
+        return new Promise(async (res, rej) => {
+            // 计算尺寸变换
+            function computeWidthHeight(inWidth, inHeight, outWidth, outHeight, scale = 1) {
+                let w, h
+                if (outWidth && outHeight) {
+                    w = outWidth
+                    h = outHeight
+                } else if (outWidth) {
+                    w = outWidth
+                    h = w / inWidth * inHeight
+                } else if (outHeight) {
+                    h = outHeight
+                    w = h / inHeight * inWidth
+                } else {
+                    w = inWidth * scale
+                    h = inHeight * scale
+                }
+                w = (w - 0).toFixed(0)
+                h = (h - 0).toFixed(0)
+                return {
+                    w,
+                    h
+                }
+            }
+
+            let info = await getInfo(input)
+            console.log(info);
+            let { width, height } = info
+            let scale =
+                outWidth / width > outHeight / height
+                    ? outWidth / width
+                    : outHeight / height;
+
+            let outSize = computeWidthHeight(width, height, null, null, scale);
+            let pos = {
+                x: 0,
+                y: 0,
+            };
+            if (outSize.h > outHeight) {
+                pos.y = (outSize.h - outHeight) / 2;
+                pos.y = pos.y.toFixed(0);
+            }
+            if (outSize.w > outWidth) {
+                pos.x = (outSize.w - outWidth) / 2;
+                pos.x = pos.x.toFixed(0);
+            }
+
+            gifsicle.run({
+                input: [{
+                    file: input,
+                    name: '1.gif'
+                }],
+                command: [
+                    `-b --resize ${outSize.w}x${outSize.h} --use-colormap=1.gif 1.gif`,
+                    `--colors 256 --crop ${pos.x},${pos.y}+${outWidth}x${outHeight} --use-colormap=1.gif  1.gif  -o /out/out.gif`,
+                    // `-b --resize _x${height} 1.gif`,
+                    // `--logical-screen 100x100 1.gif -o /out/out.gif`,
+                ],
+            }).then(async d => {
+                // let file = d[0]
+                // open(URL.createObjectURL(file))
+                res(d[0])
+            })
+        })
+    }
+    
+    function getInfo(input = '../docs/t1_2.gif') {
+        return new Promise((res, rej) => {
+            function exportKeyRex(text, before, after, mode = 1, range = 'ig') {
+                let rex
+                if (mode === 1) {
+                    rex = new RegExp(`${before}.*?${after}`, range)
+                } else if (mode === 2) {
+                    rex = new RegExp(`${before}.*?(?=${after})`, range)
+                } else if (mode === 3) {
+                    rex = new RegExp(`(?<=${before}).*?(?=${after}).*?`, range)
+                }
+                return text.match(rex)
+            }
+            function loop(text) {
+                let count = exportKeyRex(text, 'loop ', '\n', 3)
+                if (count && count[0]) {
+                    if (count[0].includes('forever')) return 0
+                    return count[0].replace(/[^0-9]/ig, '') - 1 + 2
+                } else {
+                    return 1
+                }
+            }
+            function size(text) {
+                let st = exportKeyRex(text, 'logical screen ', '\n', 3)
+                st = st[0].split('x')
+                return {
+                    width: st[0] - 0,
+                    height: st[1] - 0,
+                }
+            }
+            function frames(text) {
+                let arr = text.split(' + image').filter(d => d.includes('#'))
+                arr = arr.map(f => {
+                    let palettet = exportKeyRex(f, 'local color table \\[', '\\]\n', 3)
+                    if (palettet && palettet[0]) palettet = palettet[0] - 0
+                    return {
+                        index: exportKeyRex(f, '#', ' ', 3) - 0,
+                        transparent: exportKeyRex(f, 'transparent ', '\n', 3)[0] - 0,
+                        disposal: exportKeyRex(f, 'disposal ', ' ', 3)[0],
+                        delay: exportKeyRex(f, 'delay ', 's', 3)[0] - 0,
+                        palettet,
+                    }
+                })
+                return arr
+
+            }
+            gifsicle.run({
+                input: [{
+                    file: input,
+                    name: '1.gif'
+                }],
+                command: [
+                    '--info 1.gif -o /out/out.txt',
+                ],
+            }).then(async d => {
+                let file = d[0]
+                let text = await file.text()
+                try {
+                    let getF = frames(text)
+                    res({
+                        images: getF.length,
+                        palettet: exportKeyRex(text, 'global color table \\[', '\\]\n', 3)[0] - 0,
+                        loop: loop(text),
+                        frames: getF,
+                        ...size(text),
+
+                    })
+                } catch (error) {
+                    throw error
+                    res(null)
+                }
+            })
+
+        })
+    }
+    // getInfo().then(d => console.log(d))
+    // xxxxx()
+    function xxxxx(input = '../docs/t2.gif') {
+        return new Promise((res, rej) => {
+            gifsicle.run({
+                input: [{
+                    file: '../docs/1.gif',
+                    name: '1.gif'
+                }, {
+                    file: '../docs/2.gif',
+                    name: '2.gif'
+                }, {
+                    file: '../docs/3.gif',
+                    name: '3.gif'
+                }],
+                command: [
+                    // '-U  --no-transparent 1.gif #3  --change-color #000000 #993388   -o /out/out.gif',
+                    '--info 1.gif -o /out/out.txt',
+                    // '-b 1.gif',
+                    // '-b --resize 330x_ 1.gif',
+                    // '--logical-screen 330x330 --position 0,10 1.gif -o /out/out.gif',
+                    // '--change-color 0 #993388 1.gif  -o /out/out.gif',
+                    // '-b 1.gif',
+                    // '-b -U 1.gif',
+                    // '-e  1.gif -o /out/one.gif',
+                    // '--change-color transparent #993322 1.gif -o /out/out.gif'
+                    // '-U -t #79382A 1.gif -o /out/out.gif'
+                    // '-b 1.gif',
+                    // '-b -U 1.gif',
+                    // '-b --logical-screen 220x164 --position 10,10 1.gif',
+                    // '--transparent=#C8887D 1.gif --append  2.gif --colors=256 -o /out/out.gif',
+                    // '1.gif --replace #0 2.gif -o /out/out.gif',
+                    // '--cinfo 1.gif -o /out/out.txt',
+                    // ` --dither --transparent=#003322   1.gif -o /out/out.gif`
+                ],
+            }).then(async d => {
+
+                // console.log(d);
+                open(URL.createObjectURL(d[0]))
+                
+
+            })
+        })
+    }
+    (async function () {
+
+
+
+        return ''
+        gifsicle.run({
+            input: [{
+                file: '../docs/1.gif',
+                name: '1.gif'
+            }, {
+                file: '../docs/2.gif',
+                name: '2.gif'
+            },
+            {
+                file: '../docs/3.gif',
+                name: '3.gif'
+            }],
+            command: [
+                '--batch 1.gif -o /out/3.gif ',
+                '--batch --unoptimize /out/3.gif',
+                ' --scale 0.3 /out/3.gif  -o /out/out.gif',
+                // '--explode g.gif  -o /out/one',
+                // '--explode 2.gif -o /out/two',
+
+                // '--cinfo 1.gif -o /out/info.txt',
+                // '--no-conserve-memory --resize 100x_ 1.gif -o /out/w_100.gif',
+                // '--resize 200x_ 1.gif -o /out/w_200.gif',
+                // '--resize 300x_ 1.gif -o /out/w_300.gif',
+                // '--scale 0.8 1.gif -o /out/out.gif',
+
+                // '--crop-transparency --batch  1.gif',
+                // '--rotate-180  --batch  1.gif',
+                // '--rotate-180 --crop-transparency 1.gif -O2 --lossy=30  -o /out/out.gif'
+            ],
+        }).then(d => {
+            // open(URL.createObjectURL(d[1]))
+            // d= d.map(file => {
+            // return  new File([file],file.name.slice(1)-0+1+'.gif',{type:file.type})
+            // open(URL.createObjectURL(file))
+            // })
+            console.log(d);
+        })
+    })()
+
+
+
+</script>
+
+</html>
