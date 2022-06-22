@@ -56,5 +56,15 @@ export default {
 			}
 		};
 		xhr.send();
+	},
+	//下载文件
+	download(blob, filename = "未命名") {
+		let eleLink = document.createElement("a");
+		eleLink.download = filename;
+		eleLink.style.display = "none";
+		eleLink.href = URL.createObjectURL(blob);
+		document.body.appendChild(eleLink);
+		eleLink.click();
+		document.body.removeChild(eleLink);
 	}
 }

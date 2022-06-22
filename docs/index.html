@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <title>Gifsicle Wasm Broswer 00202</title>
+    <title>Gifsicle Wasm Broswer</title>
     <link rel="shortcut icon" href="favicon.png" />
     <meta name="description"
         content="Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, manipulate frames, resize, etc. Gif images">
@@ -25,9 +25,13 @@
     <script type="module">
         import "./js/index.js";
     </script>
-    <!--  -->
+    <!------------------------->
     <link rel="stylesheet/less" type="text/css" href="./css/index.less" />
     <script src="./js/less.js"></script>
+    <!------------------------->
+    <link rel="stylesheet" href="./css/highlight.min.css">
+    <script src="./js/highlight.min.js"></script>
+    <script src="./js/simply-beautiful.js"></script>
     <!------------------------->
     <script>
         let isSuppSW = 'serviceWorker' in navigator
@@ -36,6 +40,7 @@
             navigator.serviceWorker.register('./js/service-worker.js');
         }
     </script>
+
 </head>
 
 <body class="">
@@ -63,7 +68,7 @@
                 <div class="shareBox " :class="{'show':isShare,'copy':isCopyShare}">
                     <div class="w100 flex_column" @click="isShare?isCopyShare=true:notCanCopyShare();creatShare()">
                         <div class="icon flex_center2">
-                            <i class="i ri:code-s-slash-fill"></i>
+                            <i class="i ri:share-fill"></i>
                         </div>
                         <p>
                             Creat <br />
@@ -80,7 +85,10 @@
                         <br>
                         <div class="flex_center2">
                             <button @click="copyShare" class="button size2 color mr10">
-                                Copy
+                                <i class="i ri:file-copy-fill"></i>
+                                <span class="ml5">
+                                    Copy
+                                </span>
                             </button>
                             <button @click.stop="isCopyShare=false" class="button size2 sub">
                                 <!-- Close -->
@@ -120,7 +128,7 @@
 
                         <div class="inputBox">
                             <div v-for="(gif,index) in input" :key="gif.id" class="gifBox">
-                                <button @click="del(index,input)" class="del button size1">
+                                <button @click="del(index,input)" class="del button ">
                                     <i class="i ri:close-line"></i>
                                 </button>
                                 <div class="img">
@@ -158,7 +166,7 @@
                     <div class="con">
                         <div v-for="(item,index) in command" :key="index" class="commandsBox">
                             <textarea placeholder="Input command" v-model="item.value" rows="2"></textarea>
-                            <button @click="del(index,command)" class="del button size1">
+                            <button @click="del(index,command)" class="del button ">
                                 <i class="i ri:close-line"></i>
                             </button>
                         </div>
@@ -177,8 +185,7 @@
                     <div class="title">
                         <p>03</p>
                         <h2>Output</h2>
-                        <input v-if="outputInfo.isDone" type="range" v-model="outputViewZomm" min="0.1" max="2"
-                            step="0.1" name="" id="">
+
                     </div>
                     <div class="con">
                         <div class="green" v-if="outputInfo.isDone">
@@ -203,6 +210,19 @@
                                 <i class="i ri:error-warning-line mr5"></i>
                                 Error！{{outputInfo.errorInfo}}
                             </h2>
+                        </div>
+                        <div class="flex_between mt10" v-if="outputInfo.isDone">
+                            <button @click="download()" class="button size1 sub ">
+                                <i class="i ri:download-2-line"></i>
+                                <span class="ml5">Donwload</span>
+                            </button>
+                            <div class="flex_between">
+                                <span class="mr10">
+                                    Zoom:
+                                </span>
+                                <input type="range" v-model="outputViewZomm" min="0.1" max="2" step="0.1" name="" id="">
+
+                            </div>
                         </div>
                         <div class="outputBox" :style="`zoom:${outputViewZomm}`">
                             <div v-for="(outGif,index) in output" class="gifBox" :class="{'w100':outGif.isTxt}">
@@ -233,10 +253,35 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+
+                <div class="block step">
+                    <div class="title">
+                        <p>04</p>
+                        <h2>Code </h2>
+                    </div>
+                    <div class="con" v-if="code">
+                        <div class="flex_between mb10" v-if="outputInfo.isDone">
+                            <button @click="copyCode()" class="button size1 sub ">
+                                <i class="i ri:file-copy-line"></i>
+                                <span class="ml5">Copy code</span>
+                            </button>
+                        </div>
+
+                        <textarea id="code" style="height: 1px;
+                        width: 1px;" v-model="code"></textarea>
+                        <pre><code class="language-javascript">
+{{code}}
+                        </code></pre>
+                    </div>
+                </div>
+
             </main>
         </div>
 
     </div>
 </body>
+
 
 </html>

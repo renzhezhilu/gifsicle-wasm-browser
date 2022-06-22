@@ -3,7 +3,8 @@ import gifsicle from './gifsicle.min.js'
 // import gifsicle from '../../src/index.js'
 import gifsicleTool from './gifsicleTool.js'
 import tool from './tool.js'
-
+import UZIP from './uzip.js'
+console.log(UZIP);
 import {
     pxmu,
     pLoading,
@@ -92,6 +93,7 @@ var app = new Vue({
             randomUrlOut: [],
             selectedUrl: null,
             outputViewZomm: 1,
+            code: ''
         };
     },
     async created() {
@@ -139,6 +141,48 @@ var app = new Vue({
             pOk('Copied')
             this.isCopyShare = false
             console.log(this.isCopyShare);
+        },
+        creatCode(input, command) {
+            let beautify = SimplyBeautiful();
+            let options = {
+                indent_size: 4,
+                space_before_conditional: false,
+                jslint_happy: false,
+                max_char: 0,
+            }
+            let commandCode = ''
+            command.map((m, index) => {
+                commandCode += `"${m}",\n`
+            })
+            let inputCode = ''
+            input.map((m, index) => {
+                inputCode += `{
+                    file:"${m.name}",
+                    name:"${m.name}",
+                },\n`
+            })
+            let code = `import gifsicle from "gifsicle-wasm-browser";
+gifsicle.run({
+    input: [${inputCode}],
+    command: [${commandCode}]
+}).then(out => {
+    console.log(out)
+});`
+            this.code = beautify.js(code, options)
+            this.code = this.code.replace('= >','=>')
+            setTimeout(() => {
+                hljs.highlightAll();
+            }, 300);
+        },
+        copyCode() {
+            // pxmu.copy(`${this.code}`);
+            document.querySelector("textarea#code").select();
+            let ret = document.execCommand('copy');
+            if (ret) {
+                pOk('Copied')
+            } else {
+                pErr('Copy was unsuccessful')
+            }
         },
         notCanCopyShare() {
             pNor('Must use url import GIFs to generate share')
@@ -295,6 +339,7 @@ var app = new Vue({
             }
 
             pLoading()
+            this.code = ''
             this.outputInfo.isDone = false
             this.output = []
             let input = this.input.map(m => {
@@ -306,6 +351,11 @@ var app = new Vue({
             let command = this.command.filter(f => Boolean(f.value))
             command = command.map(m => m.value)
             console.log(input, command);
+            setTimeout(() => {
+                this.creatCode(input, command)
+            }, 100);
+
+
             let time = new Date().getTime()
             gifsicle.run({
                 input,
@@ -426,6 +476,23 @@ var app = new Vue({
         editName(index, name) {
             let item = this.inputxxx[index]
             item.name = name
+        },
+        async download() {
+            if (this.output.length === 1) {
+                tool.download(this.output[0].file, this.output[0].name)
+            } else {
+                let zip = {}
+                for (let i = 0; i < this.output.length; i++) {
+                    const item = this.output[i];
+                    let buf = await new Response(item.file).arrayBuffer().then((d) => d);
+                    buf = new Uint8Array(buf)
+                    zip[item.name] = buf
+                }
+                let out = UZIP.encode(zip)
+                out = new File([out], new Date().getTime() + '.zip', { type: 'application/zip' })
+                tool.download(out, out.name)
+            }
+
         },
         /////////////////////////////
         isFileNoPageEl(e) {
