@@ -2,7 +2,7 @@
     <a href="./README.md">En</a> | 中文
 </p>
 <p align="center">
-    <img  src="./docs/favicon.png" width="100">
+    <img   src="./docs/favicon.png" width="100">
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1>
 
@@ -10,16 +10,19 @@
     <a href="https://www.npmjs.com/package/gifsicle-wasm-browser">
         <img  align="center"  src="https://img.shields.io/npm/v/gifsicle-wasm-browser.svg?style=flat-square" height=17>
     </a>
-    <a href="https://unpkg.com/gifsicle-wasm-browser/dist/gifsicle.min.js">
+    <a href="**https**://unpkg.com/gifsicle-wasm-browser/dist/gifsicle.min.js">
         <img  align="center"  src="https://img.shields.io/bundlephobia/minzip/gifsicle-wasm-browser.svg?style=flat-square" height=17 >
     </a>
 </p>
-
+<p align="center">
 在浏览器中使用 worker 和 WebAssembly 运行 Gifsicle，对 Gif 图片进行压缩、裁剪、操作帧、调整尺寸等等操作。
-
 通过 Gifsicle 的 node.js 版本[wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle)修改而来。
 
-<img src="./docs/images/ui.webp" >
+</p>
+
+<p align="center">
+  <img align="center" src="./docs/images/ui.webp" >
+</p>
 
 # 目录
 
