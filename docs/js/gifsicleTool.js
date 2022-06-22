@@ -1,5 +1,5 @@
-// import gifsicle from './gifsicle.min.js'
-import gifsicle from '../../src/index.js'
+import gifsicle from './gifsicle.min.js'
+// import gifsicle from '../../src/index.js'
 export default {
 
     // 倒反

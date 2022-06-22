@@ -20,6 +20,11 @@ function build() {
         /(?<=PRECACHE \= \').*?(?=\')/ig,
         version
     )
+    // let indexHtml = fs.readFileSync('../docs/index.html').toString()
+    // indexHtml = indexHtml.replace('../../src/index.js','./gifsicle.min.js')
+    // let gifsicleTool = fs.readFileSync('../docs/js/gifsicleTool.js').toString()
+    // gifsicleTool = gifsicleTool.replace('../../src/index.js','./gifsicle.min.js')
+    
     fs.writeFileSync('./version', version)
     fs.writeFileSync('../package.json', package)
     fs.writeFileSync('../docs/js/service-worker.js', serviceWorker)
