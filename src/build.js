@@ -143,7 +143,7 @@ async function creatServiceWorker(params) {
         })
     }
     let siteDir = '../docs'
-    let exclude = ['service-worker.js', '.DS_Store']
+    let exclude = ['service-worker.js', '.DS_Store','_demo.html']
     let filesList = await pathMap(siteDir)
     filesList = filesList.filter(f => exclude.every(s => !f.includes(s)))
     filesList = filesList.map(m => m.replace(siteDir, '..'))
