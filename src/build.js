@@ -25,8 +25,12 @@ async function build() {
     package = package.replace(/(?<=version\"\: \").*?(?=\")/ig, version)
     let serviceWorker = fs.readFileSync('../docs/js/service-worker.js').toString()
     serviceWorker = serviceWorker.replace(
-        /(?<=PRECACHE \= \').*?(?=\')/ig,
+        /(?<=PRECACHE \= \").*?(?=\")/ig,
         version
+    )
+    serviceWorker = serviceWorker.replace(
+        /(?<=RUNTIME \= \").*?(?=\")/ig,
+        version+'_RUNTIME'
     )
     let filesList = await creatServiceWorker()
     progresLog(`creat service-worker.js files path -> ${filesList.length} 🔧`)
@@ -93,7 +97,7 @@ function updateVersionNum(num = '0.3.3') {
     let newVer = []
     for (let i = 0; i < verArr.length; i++) {
         if (i === 0) verArr[i] += 1
-        if (verArr[i] >= 10) {
+        if (verArr[i] >= 100) {
             if (verArr[i + 1] != undefined) {
                 verArr[i + 1] += 1
                 verArr[i] = 0
