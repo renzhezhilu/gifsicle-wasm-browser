@@ -147,6 +147,7 @@ async function creatServiceWorker(params) {
     let filesList = await pathMap(siteDir)
     filesList = filesList.filter(f => exclude.every(s => !f.includes(s)))
     filesList = filesList.map(m => m.replace(siteDir, '..'))
+    filesList.push('./')
     return filesList
 
 }
