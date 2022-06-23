@@ -3,11 +3,11 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = "1.4.5";
+const PRECACHE = "1.4.6.2";
 const RUNTIME = "runtime";
 
 // A list of local resources we always want to be cached.
-const PRECACHE_URLS = ['/js/gifsicle.min.js'];
+const PRECACHE_URLS = ['js/gifsicle.min.js'];
 
 // The install handler takes care of precaching the resources we always need.
 self.addEventListener('install', event => {
