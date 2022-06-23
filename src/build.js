@@ -24,10 +24,10 @@ async function build() {
     let package = fs.readFileSync('../package.json').toString()
     package = package.replace(/(?<=version\"\: \").*?(?=\")/ig, version)
     let serviceWorker = fs.readFileSync('../docs/js/service-worker.js').toString()
-    // serviceWorker = serviceWorker.replace(
-    //     /(?<=PRECACHE \= \").*?(?=\")/ig,
-    //     version
-    // )
+    serviceWorker = serviceWorker.replace(
+        /(?<=PRECACHE \= \").*?(?=\")/ig,
+        version
+    )
     // serviceWorker = serviceWorker.replace(
     //     /(?<=RUNTIME \= \").*?(?=\")/ig,
     //     version+'_RUNTIME'
@@ -146,7 +146,7 @@ async function creatServiceWorker(params) {
     let exclude = ['service-worker.js', '.DS_Store']
     let filesList = await pathMap(siteDir)
     filesList = filesList.filter(f => exclude.every(s => !f.includes(s)))
-    filesList = filesList.map(m => m.replace(siteDir, '.'))
+    filesList = filesList.map(m => m.replace(siteDir, '..'))
     return filesList
 
 }
