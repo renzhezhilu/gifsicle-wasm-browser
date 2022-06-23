@@ -23,7 +23,7 @@ async function build() {
     version = updateVersionNum(version)
     let package = fs.readFileSync('../package.json').toString()
     package = package.replace(/(?<=version\"\: \").*?(?=\")/ig, version)
-    let serviceWorker = fs.readFileSync('../docs/js/service-worker.js').toString()
+    let serviceWorker = fs.readFileSync('../docs/service-worker.js').toString()
     serviceWorker = serviceWorker.replace(
         /(?<=PRECACHE \= \").*?(?=\")/ig,
         version
@@ -47,7 +47,7 @@ async function build() {
 
     fs.writeFileSync('./version', version)
     fs.writeFileSync('../package.json', package)
-    fs.writeFileSync('../docs/js/service-worker.js', serviceWorker)
+    fs.writeFileSync('../docs/service-worker.js', serviceWorker)
     progresLog(`out files 🔧 `)
 
     ////////////////
@@ -142,12 +142,12 @@ async function creatServiceWorker(params) {
             }
         })
     }
-    let siteDir = '../docs'
-    let exclude = ['service-worker.js', '.DS_Store','_demo.html']
+    let siteDir = '../docs/'
+    let exclude = ['service-worker.js', '.DS_Store','_demo.html','index.html']
     let filesList = await pathMap(siteDir)
     filesList = filesList.filter(f => exclude.every(s => !f.includes(s)))
-    filesList = filesList.map(m => m.replace(siteDir, '..'))
-    filesList.unshift('../')
+    filesList = filesList.map(m => m.replace(siteDir, ''))
+    filesList.unshift('index.html','./')
     return filesList
 
 }
