@@ -3,7 +3,7 @@
     <a href="./README.md">En</a> | Chinese
 </p>
 <p align="center">
-    <img src="./docs/favicon.png" width="100">
+    <img src="./docs/icon.png" width="100">
 </p>
 <h1 align="center">Gifsicle Wasm Browser</h1>
 
@@ -20,7 +20,7 @@ Use workers and WebAssembly to run Gifsicle in the browser to compress, crop, ma
 
 Modified from the node.js version of Gifsicle [wasm-codecs](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle).
 
-<img src="./docs/ui.jpg" >
+<img src="./docs/images/ui.webp" >
 
 # Table of contents
 

@@ -15,7 +15,7 @@
 - [toast](https://oct.cn/project/pxmu/)
 - [zip](https://github.com/photopea/UZIP.js)
 - [code style](<[xx](https://github.com/highlightjs/highlight.js)>)
-- [beautiful code](https://github.com/itw-creative-works/simply-beautiful/)
+<!-- - [beautiful code](https://github.com/itw-creative-works/simply-beautiful/) -->
 - [page cache](https://googlechrome.github.io/samples/service-worker/basic/)
 
 ---
@@ -24,34 +24,3 @@
 
 ## Base demos
 
-<table>
-  <tr>
-    <th>Crop</th>
-    <th>Resize</th>
-    <th>Frame</th>
-  </tr>
-  <tr>
-    <td> 
-        <a href="xx" >xxx 🆕</a>
-    </td>
-    <td>
-        <a href="xx" >xxx</a>
-    </td>
-  </tr>
-  <tr>
-    <td> 
-        <a href="xx" >xxx</a>
-    </td>
-    <td>
-        <a href="xx" >xxx</a>
-    </td>
-  </tr>
-  <tr>
-    <td> 
-        <a href="xx" >xxx</a>
-    </td>
-    <td>
-        <a href="xx" >xxx</a>
-    </td>
-  </tr>
-</table>

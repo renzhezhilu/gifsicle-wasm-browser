@@ -530,6 +530,11 @@ gifsicle.run({
                 return isGif
             })
         },
+        auto_grow(event) {
+            let element = event.target;
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight)+"px";
+        },
         inputFilePageEvent() {
             let _this = this
             let body = document.querySelector('body')
@@ -571,6 +576,7 @@ gifsicle.run({
             handler(val, oldVal) {
                 console.log(this.input);
                 console.log(this.command);
+                
             },
             deep: true,
         },

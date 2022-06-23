@@ -48,7 +48,8 @@ let gifsicle = {
 				throw "<command> the content can not be blank" + this.errorLink();
 			}
 			if (type === "array") {
-				return command;
+				let delNewline = command.map(m=>m.replace(/\n/ig,' '));
+				return delNewline
 			} else {
 				throw (
 					"<command> types:" + type + ", must be an array" + this.errorLink()

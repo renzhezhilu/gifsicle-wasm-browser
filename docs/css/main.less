@@ -1,6 +1,15 @@
 //////////////////////////////////////////////////////
 body {
-  background: url("../images/bg.webp") 0 0 no-repeat;
+  // background: linear-gradient(blue,transparent ),url("../images/bg.webp");
+  // background: linear-gradient(
+  //     217deg,
+  //     rgb(49, 177, 228),
+  //     rgba(0, 255, 0, 0) 70.71%
+  //   ),
+  //   linear-gradient(127deg, rgb(208, 208, 181), rgba(255, 0, 0, 0) 120.71%),
+  //   linear-gradient(57deg, rgb(34, 168, 17), rgba(255, 0, 0, 0) 120.71%),
+  //   linear-gradient(336deg, rgb(50, 182, 191), rgba(0, 0, 255, 0) 70.71%);
+  background: url("../images/bg.jpg") 0 0 no-repeat;
   background-color: var(--color);
   background-size: 100vw 100vh;
   color: var(--text);
@@ -11,12 +20,12 @@ body {
   min-height: 100vh;
   padding: 20px;
   position: relative;
-  &.drag::after{
+  &.drag::after {
     top: 0%;
     opacity: 1;
   }
-  &::after{
-    content: 'Drag GIFs here';
+  &::after {
+    content: "Drag GIFs here";
     position: fixed;
     display: flex;
     justify-content: center;
@@ -29,11 +38,10 @@ body {
     left: 0;
     top: -120vh;
     opacity: 0;
-    transition: .3s;
+    transition: 0.3s;
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
-
   }
 }
 header {
@@ -95,17 +103,15 @@ main {
     font-weight: 900;
     font-size: 16px;
     transition: 0.3s;
-    &>div{
-    padding:5px 12px;
-    &.w100{
-      padding: 12px;
-    }
-
+    & > div {
+      padding: 5px 12px;
+      &.w100 {
+        padding: 12px;
+      }
     }
     &.show {
       opacity: 1;
       margin-bottom: 0%;
-      
     }
     &.copy {
       width: 300px;
@@ -120,7 +126,7 @@ main {
         color: var(--text_white);
       }
     }
-   
+
     a {
       padding-top: 12px;
       padding-bottom: 12px;
@@ -294,11 +300,10 @@ main {
   color: var(--color) !important;
   border-radius: 6px;
   margin: 6px;
-  i{
-  font-size: 80px !important;
-  line-height: 70px;
-  font-weight: 900;
-
+  i {
+    font-size: 80px !important;
+    line-height: 70px;
+    font-weight: 900;
   }
   &:hover {
     background-color: var(--text_op1);
@@ -326,14 +331,13 @@ main {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  textarea{
+  textarea {
     height: 300px;
     background-color: var(--text_op);
     padding: 10px;
     border-radius: 10px;
   }
   .gifBox {
-   
     & > div {
       padding: 15px 15px 0 0;
     }
@@ -412,7 +416,7 @@ main {
 
 .run {
   // background: url("https://media.giphy.com/media/5noegfOBr5YHn4wYAM/giphy.gif")
-    // center center no-repeat;
+  // center center no-repeat;
   // background-size: 70px auto;
 }
 
