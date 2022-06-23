@@ -24,14 +24,14 @@ async function build() {
     let package = fs.readFileSync('../package.json').toString()
     package = package.replace(/(?<=version\"\: \").*?(?=\")/ig, version)
     let serviceWorker = fs.readFileSync('../docs/js/service-worker.js').toString()
-    serviceWorker = serviceWorker.replace(
-        /(?<=PRECACHE \= \").*?(?=\")/ig,
-        version
-    )
-    serviceWorker = serviceWorker.replace(
-        /(?<=RUNTIME \= \").*?(?=\")/ig,
-        version+'_RUNTIME'
-    )
+    // serviceWorker = serviceWorker.replace(
+    //     /(?<=PRECACHE \= \").*?(?=\")/ig,
+    //     version
+    // )
+    // serviceWorker = serviceWorker.replace(
+    //     /(?<=RUNTIME \= \").*?(?=\")/ig,
+    //     version+'_RUNTIME'
+    // )
     let filesList = await creatServiceWorker()
     progresLog(`creat service-worker.js files path -> ${filesList.length} 🔧`)
     filesList = filesList.map(m=>`'${m}'`).toString()
