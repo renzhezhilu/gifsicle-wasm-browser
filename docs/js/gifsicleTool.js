@@ -189,10 +189,14 @@ export default {
                 let arr = text.split(' + image').filter(d => d.includes('#'))
                 arr = arr.map(f => {
                     let palettet = exportKeyRex(f, 'local color table \\[', '\\]\n', 3)
+                    let transparent=_=>{
+                        let tra  = exportKeyRex(f, 'transparent ', '\n', 3)
+                        return tra?tra[0]-0:null
+                    }
                     if (palettet && palettet[0]) palettet = palettet[0] - 0
                     return {
                         index: exportKeyRex(f, '#', ' ', 3) - 0,
-                        transparent: exportKeyRex(f, 'transparent ', '\n', 3)?.[0] - 0,
+                        transparent: transparent(),
                         disposal: exportKeyRex(f, 'disposal ', ' ', 3)?.[0],
                         delay: exportKeyRex(f, 'delay ', 's', 3)?.[0] - 0,
                         palettet,
