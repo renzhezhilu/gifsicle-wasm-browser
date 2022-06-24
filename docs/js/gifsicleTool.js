@@ -190,15 +190,23 @@ export default {
                 arr = arr.map(f => {
                     let palettet = exportKeyRex(f, 'local color table \\[', '\\]\n', 3)
                     let transparent=_=>{
-                        let tra  = exportKeyRex(f, 'transparent ', '\n', 3)
-                        return tra?tra[0]-0:null
+                        let is  = exportKeyRex(f, 'transparent ', '\n', 3)
+                        return is?is[0]-0:null
+                    }
+                    let disposal=_=>{
+                        let is  = exportKeyRex(f, 'disposal ', ' ', 3)
+                        return is?is[0]:null
+                    }
+                    let delay=_=>{
+                        let is  = exportKeyRex(f, 'delay ', 's', 3)
+                        return is?is[0]-0:null
                     }
                     if (palettet && palettet[0]) palettet = palettet[0] - 0
                     return {
                         index: exportKeyRex(f, '#', ' ', 3) - 0,
                         transparent: transparent(),
-                        disposal: exportKeyRex(f, 'disposal ', ' ', 3)?.[0],
-                        delay: exportKeyRex(f, 'delay ', 's', 3)?.[0] - 0,
+                        disposal: disposal(),
+                        delay: delay(),
                         palettet,
                     }
                 })
