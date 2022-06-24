@@ -1,11 +1,10 @@
 
-// const fs = require('fs')
-const fs = require('fs-extra')
+const fs = require('fs')
+// const fs = require('fs-extra')
 const path = require('path');
 const { promises } = require('stream');
 const UglifyJS = require("uglify-js");
 ///////////////
-
 
 build()
 async function build() {

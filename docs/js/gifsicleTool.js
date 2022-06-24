@@ -206,7 +206,7 @@ export default {
                     t+=m.delay
                 })
 
-                return t.toFixed(1)
+                return t.toFixed(2)
             }
             let inputFile=null
             gifsicle.run({

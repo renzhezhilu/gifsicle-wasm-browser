@@ -171,7 +171,7 @@ gifsicle.run({
             this.code = this.code.replace('= >','=>')
             setTimeout(() => {
                 hljs.highlightAll();
-            }, 300);
+            }, 600);
         },
         copyCode() {
             // pxmu.copy(`${this.code}`);
