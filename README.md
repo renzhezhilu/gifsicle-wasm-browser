@@ -1,5 +1,5 @@
 <p align="right">
-  <a href="./README.md">En</a> | Chinese
+   En | <a href="./README_CN.md">中文</a>
 </p>
 <p align="center">
   <img src="./docs/icon.png" width="100">
@@ -175,9 +175,9 @@ gifsicle.run({
 
 ### input
   - `Array`: input Gif file
-  - ###file
+  - ### file
     - `String`: the web url of the GIF
-    - `File` , `Blob` , `ArrayBuffer`: local files obtained via  <input type=load />
+    - `File` , `Blob` , `ArrayBuffer`: local files obtained via  `<input type=load />`
   - ### name
     - `String`: the filename that will be used in `command`
 ### command
@@ -189,7 +189,7 @@ gifsicle.run({
   - default: `false`
 
 
-# Precautions
+# Tips
 
 - `name` in `input` can be customized, but cannot be repeated.
 - The last line of `command` must contain `-o /out/**.gif`,
@@ -197,7 +197,7 @@ gifsicle.run({
 - `command` will be executed one by one in sequence, please use multiple `gifsicle.run()` if you need to process multiple GIFs at the same time. [Execute sequentially](https://codepen.io/random233/pen/mdXgqwK?editors=1001) | [Execute simultaneously](https://codepen.io/random233/pen/ZErZavQ?editors=1000)
 
 
-# author
+# Author
 
 gifsicle-wasm-browser is [@renzhezhilu](https://github.com/renzhezhilu) at
 [wasm-codecs/gifsicle](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle) and
