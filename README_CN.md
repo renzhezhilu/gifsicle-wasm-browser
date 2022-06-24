@@ -16,9 +16,7 @@
   </a>
 </p>
 <p align="center">
-  在浏览器中使用 worker 和 WebAssembly 运行 Gifsicle，对 Gif 图片进行压缩、裁剪、操作帧、调整尺寸等等操作。
-  通过 Gifsicle 的 node.js 版本 <a
-    href="https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle">wasm-codecs</a>修改而来。
+  在浏览器中运行 Gifsicle，对 GIFs 进行压缩、裁剪、操作帧、调整尺寸等等操作。
 
 </p>
 
@@ -44,7 +42,7 @@
 
 # Demo
 ## 基础用法
-更多命令请查阅[Gifsicle手册](https://www.lcdf.org/gifsicle/man.html)
+更多命令请查阅[Gifsicle手册](https://www.lcdf.org/gifsicle/man.html)。
 <!-- > - 裁剪发生在任何旋转、翻转、调整大小或定位之前 -->
 <table>
   <tr>
@@ -115,7 +113,7 @@
 </table>
 
 ## 完整示例
-通过将多条命令组合起来，完成比较实用的功能。
+[gifsicleTool.js](./docs/js/gifsicleTool.js) 通过将多条命令组合起来，完成比较实用的功能。
 
 - [修改尺寸后合并](https://codepen.io/random233/pen/WNMWqyq?editors=1001)
 - [覆盖模式调整尺寸](https://codepen.io/random233/pen/PoQgrrL?editors=1001)
@@ -130,6 +128,7 @@
 
 ## npm 安装
 
+[import in vue](https://codesandbox.io/s/crimson-lake-jbuudt?file=/src/App.vue)
 ```
 $ npm i gifsicle-wasm-browser --save
 ```
@@ -151,7 +150,7 @@ gifsicle.run({
 ```
 
 ## cdn
-<!-- [cdn demo](https://codepen.io/random233/pen/BaYEwvr)  -->
+[cdn demo](https://codepen.io/random233/pen/BaYEwvr) 
 
 ```html
 <script type="module">
@@ -170,7 +169,7 @@ gifsicle.run({
 ### input
   - `Array`: 输入的 Gif 文件
   - ### file
-    - `String`: 网络 url 或相对路径
+    - `String`: GIF的网络url
     - `File` 、 `Blob` 、 `ArrayBuffer`: 通过\<input type=load />获取的本地文件
   - ### name
     - `String`: 将在 `command` 中使用的文件名
@@ -195,7 +194,7 @@ gifsicle.run({
 
 gifsicle-wasm-browser 是 [@renzhezhilu](https://github.com/renzhezhilu) 在
 [wasm-codecs/gifsicle](https://github.com/cyrilwanner/wasm-codecs/tree/master/packages/gifsicle) 和
-[gifsicle](https://github.com/kohler/gifsicle) 基础上开发的
+[gifsicle](https://github.com/kohler/gifsicle) 基础上开发。
 
 # To do
 - [x] 单个 Gif 输入和输出
