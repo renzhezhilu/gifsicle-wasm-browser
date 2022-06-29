@@ -17,7 +17,6 @@
 </p>
 <p align="center">
   Run Gifsicle in your browser to compress, crop, frame, resize, and more on GIFs.
-
 </p>
 
 <p align="center">
@@ -148,11 +147,11 @@ gifsicle.run({
       file: "./cat.gif",
       name: "1.gif",
   }],
-  command: ["--resize 100x_ 1.gif -o /out/out.gif"],
+  command: ["-e -U 100x_ 1.gif -o /out/out.gif"],
 })
-.then(async(d) => {
-  console.log(d);
-  // [File]
+.then(async(outArr) => {
+  console.log(outArr);
+  // [File,File,File ...]
 });
 ````
 
@@ -171,13 +170,13 @@ gifsicle.run({
 
 # Api
 
-## gifsicle.run()
+## gifsicle.run(input=[], command=[])
 
 ### input
   - `Array`: input Gif file
   - ### file
     - `String`: the web url of the GIF
-    - `File` , `Blob` , `ArrayBuffer`: local files obtained via  `<input type=load />`
+    - `File` , `Blob` , `ArrayBuffer`: local files obtained via  [\<input type="file"\>](https://codepen.io/random233/pen/BaYEwvr?editors=1010)
   - ### name
     - `String`: the filename that will be used in `command`
 ### command
@@ -188,6 +187,8 @@ gifsicle.run({
   - `Boolean`: (optional) `command` ends immediately on error
   - default: `false`
 
+## return
+  array of GIF [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
 # Tips
 

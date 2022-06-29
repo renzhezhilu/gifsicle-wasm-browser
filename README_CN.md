@@ -141,11 +141,11 @@ gifsicle.run({
       file: "./cat.gif",
       name: "1.gif",
   }],
-  command: ["--resize 100x_ 1.gif -o /out/out.gif"],
+  command: ["-e -U 100x_ 1.gif -o /out/out.gif"],
 })
-.then(async (d) => {
-  console.log(d);
-  // [File]
+.then(async(outArr) => {
+  console.log(outArr);
+  // [File,File,File ...]
 });
 ```
 
@@ -164,13 +164,13 @@ gifsicle.run({
 
 # Api
 
-## gifsicle.run()
+## gifsicle.run(input=[], command=[])
 
 ### input
   - `Array`: 输入的 Gif 文件
   - ### file
     - `String`: GIF的网络url
-    - `File` 、 `Blob` 、 `ArrayBuffer`: 通过\<input type=load />获取的本地文件
+    - `File` 、 `Blob` 、 `ArrayBuffer`: 通过[\<input type="file"\>](https://codepen.io/random233/pen/BaYEwvr?editors=1010)获取的本地文件
   - ### name
     - `String`: 将在 `command` 中使用的文件名
 ### command
@@ -180,7 +180,8 @@ gifsicle.run({
 ### isStrict
   - `Boolean`: (可选的) `command` 发生错误时立即结束
   - default:`false` 
-
+## 返回
+  GIF [File](https://developer.mozilla.org/en-US/docs/Web/API/File)数组
 
 # 注意事项
 
