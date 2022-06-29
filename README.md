@@ -177,7 +177,7 @@ gifsicle.run({
 ## gifsicle.run(input=[], command=[])
 
 ### input
-  - `Array`: input Gif file
+  - `Array`: input GIFs file
   - ### file
     - `String`: the web url of the GIF
     - `File` , `Blob` , `ArrayBuffer`: local files obtained via  [\<input type="file"\>](https://codepen.io/random233/pen/BaYEwvr?editors=1010)
@@ -188,11 +188,11 @@ gifsicle.run({
 ### folder
   - `Array`: (optional) folder name to be used in `command`
 ### isStrict
-  - `Boolean`: (optional) `command` ends immediately on error
+  - `Boolean`: (optional) `command` End immediately on error or warning
   - default: `false`
 
 ## return
-  array of GIF [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
+  array of GIFs [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
 # Tips
 
@@ -210,7 +210,7 @@ Developed on the basis of [gifsicle](https://github.com/kohler/gifsicle).
 
 # To do
 - [x] single Gif input and output
-- [x] Multiple Gif input and output (full version)
+- [x] Multiple Gifs input and output (full version)
 - [x] Npm
 - [ ]
 Multi-core processing ([SharedArrayBuffer](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer))

@@ -182,7 +182,7 @@ gifsicle.run({
 ### folder
   - `Array`: (可选的) 将在 `command` 中使用的文件夹名称
 ### isStrict
-  - `Boolean`: (可选的) `command` 发生错误时立即结束
+  - `Boolean`: (可选的) `command` 发生错误或警告时立即结束
   - default:`false` 
 ## 返回
   GIF [File](https://developer.mozilla.org/en-US/docs/Web/API/File)数组
