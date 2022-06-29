@@ -147,7 +147,7 @@ gifsicle.run({
     1.gif 
     -o /out/out.gif`],
 })
-.then(async(outGifFiles) => {
+.then(outGifFiles => {
   console.log(outGifFiles);
   // [File,File,File ...]
 });
