@@ -147,10 +147,14 @@ gifsicle.run({
       file: "./cat.gif",
       name: "1.gif",
   }],
-  command: ["-e -U 100x_ 1.gif -o /out/out.gif"],
+  command: [`
+    -e -U 
+    --resize 100x_ 
+    1.gif 
+    -o /out/out.gif`],
 })
-.then(async(outArr) => {
-  console.log(outArr);
+.then(async(outGifFiles) => {
+  console.log(outGifFiles);
   // [File,File,File ...]
 });
 ````
