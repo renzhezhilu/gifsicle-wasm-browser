@@ -1,5 +1,5 @@
-<p align="right">
-   En | <a href="./README_CN.md">中文</a>
+<p align="left">
+   En | <a href="./README_CN.md">简体中文</a>
 </p>
 <p align="center">
   <img src="./docs/icon.png" width="100">
@@ -195,11 +195,16 @@ gifsicle.run({
   array of GIFs [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
 # Tips
-
-- `name` in `input` can be customized, but cannot be repeated.
-- The last line of `command` must contain `-o /out/**.gif`,
-- The default available directories are `/` , `/out` , `/tem`, when `command` is executed, all files in `/out` will be exported
-- `command` will be executed one by one in sequence, please use multiple `gifsicle.run()` if you need to process multiple GIFs at the same time. [Execute sequentially](https://codepen.io/random233/pen/mdXgqwK?editors=1001) | [Execute simultaneously](https://codepen.io/random233/pen/ZErZavQ?editors=1000)
+- ### Function usage
+  - `name` in `input` can be customized, but cannot be repeated.
+  - The last line of `command` must contain `-o /out/**.gif`,
+  - The default available directories are `/` , `/out` , `/tem`, when `command` is executed, all files in `/out` will be exported
+  - `command` will be executed one by one in sequence, please use multiple `gifsicle.run()` if you need to process multiple GIFs at the same time. [Execute sequentially](https://codepen.io/random233/pen/mdXgqwK?editors=1001) | [Execute simultaneously](https://codepen.io/random233/pen/ZErZavQ?editors=1000)
+- ### Experience about compressing Gif 
+  - Use `-O3` or `-O2` with caution, especially for large files over 10Mb, the time-consuming will increase exponentially, and the compression effect is almost the same as `-O1`. 
+  - The value range of `lossy` is between **1-200**, the larger the value, the more obvious the noise of the Gif image. 
+  - In my experience, `-O1 --lossy=30` is a more balanced choice.
+  ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif)
 
 
 # Author

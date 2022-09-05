@@ -1,5 +1,5 @@
-<p align="right">
-  <a href="./README.md">En</a> | 中文
+<p align="left">
+  <a href="./README.md">En</a> | 简体中文
 </p>
 <p align="center">
   <img src="./docs/icon.png" width="100">
@@ -161,8 +161,6 @@ gifsicle.run({
   import gifsicle from 'https://unpkg.com/gifsicle-wasm-browser/dist/gifsical.min.js'
   // or
   import gifsicle from 'https://cdn.jsdelivr.net/npm/gifsicle-wasm-browser/dist/gifsicle.min.js'
-      ...
-  })
 </script>
 ```
 
@@ -188,11 +186,17 @@ gifsicle.run({
   GIF [File](https://developer.mozilla.org/en-US/docs/Web/API/File)数组
 
 # 注意事项
+- ### 函数使用
+  - `input` 中的 `name` 可以自定义，但是不能重复。
+  - `command` 的最后一条必须包含`-o /out/**.gif`,
+  - 默认可用的目录有 `/` 、 `/out` 、 `/tem`，当 `command` 执行完成后会将`/out`的所有文件导出
+  - `command` 将按顺序逐个执行, 需要对多个 GIFs 同时处理时请使用多个 `gifsicle.run()`。[按顺序执行](https://codepen.io/random233/pen/mdXgqwK?editors=1001) | [同时执行](https://codepen.io/random233/pen/ZErZavQ?editors=1000)
+- ### 关于压缩Gif的经验
+  - 谨慎使用`-O3`或`-O2`,尤其是10Mb以上大文件,耗时会成倍上涨，并且压缩效果和`-O1`几乎无差别。
+  - `lossy`数值范围在 **1-200** 之间,数值越大Gif画面的噪点越明显。
+  - 根据我的经验, `-O1 --lossy=30` 是比较均衡的选择。
+  ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif)
 
-- `input` 中的 `name` 可以自定义，但是不能重复。
-- `command` 的最后一条必须包含`-o /out/**.gif`,
-- 默认可用的目录有 `/` 、 `/out` 、 `/tem`，当 `command` 执行完成后会将`/out`的所有文件导出
-- `command` 将按顺序逐个执行, 需要对多个 GIFs 同时处理时请使用多个 `gifsicle.run()`。[按顺序执行](https://codepen.io/random233/pen/mdXgqwK?editors=1001) | [同时执行](https://codepen.io/random233/pen/ZErZavQ?editors=1000)
 
 
 # 作者
