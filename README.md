@@ -204,7 +204,9 @@ gifsicle.run({
   - Use `-O3` or `-O2` with caution, especially for large files over 10Mb, the time-consuming will increase exponentially, and the compression effect is almost the same as `-O1`. 
   - The value range of `lossy` is between **1-200**, the larger the value, the more obvious the noise of the Gif image. 
   - In my experience, `-O1 --lossy=30` is a more balanced choice.
-  ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif)
+  ![a2258ff2-bd49-4151-9701-9fce64c8a3f1](https://user-images.githubusercontent.com/7707921/188505052-c09d312e-cc91-40cd-baef-cb62b7b0f93d.gif)
+
+  <!-- ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif) -->
 
 
 # Author

@@ -195,7 +195,9 @@ gifsicle.run({
   - 谨慎使用`-O3`或`-O2`,尤其是10Mb以上大文件,耗时会成倍上涨，并且压缩效果和`-O1`几乎无差别。
   - `lossy`数值范围在 **1-200** 之间,数值越大Gif画面的噪点越明显。
   - 根据我的经验, `-O1 --lossy=30` 是比较均衡的选择。
-  ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif)
+  - ![a2258ff2-bd49-4151-9701-9fce64c8a3f1](https://user-images.githubusercontent.com/7707921/188505052-c09d312e-cc91-40cd-baef-cb62b7b0f93d.gif)
+
+  <!-- ![gifsicle-wasm-browser压缩参数图示1111](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif) -->
 
 
 
