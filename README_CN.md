@@ -194,8 +194,11 @@ gifsicle.run({
 - ### 关于压缩Gif的经验
   - 谨慎使用`-O3`或`-O2`,尤其是10Mb以上大文件,耗时会成倍上涨，并且压缩效果和`-O1`几乎无差别。
   - `lossy`数值范围在 **1-200** 之间,数值越大Gif画面的噪点越明显。
-  - 根据我的经验, **30-60** 是比较均衡的选择。<br><br>
-  ![gifsicle-wasm-browser压缩参数图示02](https://user-images.githubusercontent.com/7707921/188506723-8978412c-d4bb-49d4-867c-b876c1ade1f2.gif)
+  - 根据我的经验, **30-60** 是比较均衡的选择。
+  
+🦁️ Gif:[小狮子的耳朵](https://user-images.githubusercontent.com/7707921/188507621-49aa2691-a7d4-4b35-bb06-4ecb35b361d4.gif)
+
+![gifsicle-wasm-browser压缩参数图示02](https://user-images.githubusercontent.com/7707921/188506723-8978412c-d4bb-49d4-867c-b876c1ade1f2.gif)
 
 
   <!-- ![gifsicle-wasm-browser压缩参数图示01](https://user-images.githubusercontent.com/7707921/188500398-59093705-c766-4b81-8c62-10a851906119.gif) -->

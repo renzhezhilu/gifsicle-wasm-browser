@@ -203,8 +203,13 @@ gifsicle.run({
 - ### Experience about compressing Gif 
   - Use `-O3` or `-O2` with caution, especially for large files over 10Mb, the time-consuming will increase exponentially, and the compression effect is almost the same as `-O1`. 
   - The value range of `lossy` is between **1-200**, the larger the value, the more obvious the noise of the Gif image. 
-  - In my experience, **30-60** is a more balanced choice.<br><br>
-  ![gifsicle-wasm-browser Compression parameter graphic 02](https://user-images.githubusercontent.com/7707921/188506723-8978412c-d4bb-49d4-867c-b876c1ade1f2.gif)
+  - In my experience, **30-60** is a more balanced choice.
+
+
+🦁️ Gif:[little lion ears](https://user-images.githubusercontent.com/7707921/188507621-49aa2691-a7d4-4b35-bb06-4ecb35b361d4.gif)
+
+
+![gifsicle-wasm-browser Compression parameter graphic 02](https://user-images.githubusercontent.com/7707921/188506723-8978412c-d4bb-49d4-867c-b876c1ade1f2.gif)
 
 
 
