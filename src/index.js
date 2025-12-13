@@ -149,9 +149,9 @@ let gifsicle = {
 
 			
 
-			console.log(newCommand);
-			console.log(newFiles);
-			console.log(workerUrl);
+			// console.log(newCommand);
+			// console.log(newFiles);
+			// console.log(workerUrl);
 			myWorker.postMessage({
 				data: newFiles,
 				command: newCommand,
